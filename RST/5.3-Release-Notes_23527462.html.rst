@@ -1,0 +1,404 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+
+eZ Publish Platform 5.x : 5.3 Release Notes
+===========================================
+
+Created by andre.romcke@ez.no, last modified by jerome.vieilledent@ez.no
+on Jul 31, 2014
+
+Meet the future eZ Platform
+---------------------------
+
+27th May 2014
+'''''''''''''
+
++--------------------------------------+--------------------------------------+
+| |image1|                             | | eZ Publish Platform 5.3 offers     |
+|                                      | large improvements of the future     |
+|                                      | proof Symfony based "Platform        |
+|                                      | stack", as well as a stable          |
+|                                      | foundation to upgrade legacy (4.x)   |
+|                                      | to with it's 3+2 years LTS (`Long    |
+|                                      | term                                 |
+|                                      | supported <http://support.ez.no/Publ |
+|                                      | ic/Service-Life>`__)                 |
+|                                      | release with much improved           |
+|                                      | integrations and documentation.      |
+|                                      |                                      |
+|                                      | The main theme of 5.3 has been to    |
+|                                      | complete the integration with the    |
+|                                      | Symfony ecosystem, embracing         |
+|                                      | standard components making the       |
+|                                      | transition from Symfony development  |
+|                                      | to eZ development a lot easier,      |
+|                                      | while also providing more features   |
+|                                      | eZ developers have traditionally     |
+|                                      | been used to.                        |
+|                                      |                                      |
+|                                      | From 5.3 on, while it is still       |
+|                                      | possible to use the legacy stack and |
+|                                      | templating system, we think using    |
+|                                      | the "Platform stack" (previously     |
+|                                      | referred as "New/Symfony/6.x") and   |
+|                                      | the Symfony framework is the main    |
+|                                      | way to go. This will be the          |
+|                                      | foundation for the future `eZ        |
+|                                      | Platform <http://ez.no/About-eZ/Blog |
+|                                      | /Introducing-eZ-Platform-And-Its-New |
+|                                      | -Development-Cycle>`__               |
+|                                      | where it will operate without        |
+|                                      | dependencies on the legacy stack.    |
+|                                      |                                      |
+|                                      | Quick links                          |
+|                                      | ^^^^^^^^^^^                          |
+|                                      |                                      |
+|                                      | -  `Install                          |
+|                                      |    5.3 <Installation_7438500.html>`_ |
+|                                      | _                                    |
+|                                      | -  `Upgrade from 5.1 to              |
+|                                      |    5.3 <Upgrading-from-5.1-to-5.3_21 |
+|                                      | 299688.html>`__                      |
+|                                      | -  | `Upgrade from 5.2 to            |
+|                                      |    5.3 <Upgrading-from-5.2-to-5.3_19 |
+|                                      | 891003.html>`__                      |
+|                                      |                                      |
+                                                                             
++--------------------------------------+--------------------------------------+
+
+5.3 Features
+------------
+
+5.3 introduces several new features which makes it easier to use, faster
+to develop on and also continues to improve performance.
+
+Doctrine DBAL / DoctrineBundle use
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+eZ Publish 5.3 now uses Doctrine DBAL instead of Zeta Components
+Database. This allows users to reuse database connection and settings
+with other pure Symfony2 bundles which uses Doctrine ORM (default choice
+in Symfony2 documentation and code generators).
+
+-  Documentation:
+
+   -  `Content Repository
+      configuration <Content-Repository-configuration_19891591.html>`__
+   -  `Upgrade
+      documentation <https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/upgrade/5.3.md#database-configuration>`__
+
+-  Implementation details: `Original JIRA
+   issue <https://jira.ez.no/browse/EZP-22279>`__, `DoctrineBundle
+   integration
+   pull-request <https://github.com/ezsystems/ezpublish-kernel/pull/736>`__,
+   `Legacy storage engine refactoring
+   pull-request <https://github.com/ezsystems/ezpublish-kernel/pull/704>`__,
+   `Legacy storage engine refactoring
+   pull-request <https://jira.ez.no/browse/EZP-22151>`__
+
+User authentication using Symfony security component
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+New login / logout functionality that uses Symfony's authentication
+system. This enables any kind of login handler or SSO handler made for
+Symfony to also work with eZ Publish 5., including handlers for LDAP.
+
+-  Documentation:
+
+   -  `Authentication with
+      Symfony <https://confluence.ez.no/display/EZP/Authentication>`__
+   -  `How to authenticate a user with multiple user
+      providers <How-to-authenticate-a-user-with-multiple-user-providers_19891606.html>`__
+
+-  Implementation details: `Original
+   issue <https://jira.ez.no/browse/EZP-22045>`__, `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/656>`__, \ `Multiple
+   user providers issue <https://jira.ez.no/browse/EZP-22081>`__,
+   `Multiple user providers pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/683>`__
+
+Full Composer support
+~~~~~~~~~~~~~~~~~~~~~
+
+With 5.3 there is no longer two ways to deal with updates. Now it is
+only composer updates also for eZ Publish related software.
+
+-  Documentation: `Using Composer <Using-Composer_23527865.html>`__,
+   `5.3.1 Release Notes <5.3.1-Release-Notes_23527464.html>`__, \ `5.3.2
+   Release Notes <5.3.2-Release-Notes_23528040.html>`__
+
+Legacy SSO support
+~~~~~~~~~~~~~~~~~~
+
+Allows use of existing legacy SSO handlers with the new user login
+system in 5.3 which is powered by Symfony.
+
+-  Documentation: `Authentication with Legacy SSO
+   Handlers <Authentication_19891028.html#Authentication-AuthenticationwithLegacySSOHandlers>`__
+-  Implementation details: `Original
+   issue <https://jira.ez.no/browse/EZP-22099>`__, `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/691>`__\ ` <https://jira.ez.no/browse/EZP-22099>`__
+
+Content Preview using "eZ Platform" stack
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With 5.3 your content previewing needs, also from the current legacy
+based admin interface will run on the new "*eZ Platform*\ " stack,
+avoiding that you need to also create all templates in legacy to be able
+to preview correctly.
+
+-  Implementation details:
+   `Original <https://jira.ez.no/browse/EZP-22051>`__\ `Issue <https://jira.ez.no/browse/EZP-22051>`__,
+   `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/662>`__
+
+Solr 4.x support in eZ Find and API
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Preview of Solr 4.x support in API and bundled Solr 4.7.0 support for
+ezfind allows for use of new functionality provided by Solr 4.x such as
+improved performance for indexing and new options like soft commit to
+control this.
+
+eZ Find:
+
+-  Documentation: `What is new in eZ Find LS
+   5.3.0? <https://doc.ez.no/Extensions/eZ-Publish-extensions/eZ-Find/eZ-Find-LS-5.3.0/What-is-new-in-eZ-Find-LS-5.3.0>`__
+-  Implementation details: `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/649>`__
+
+Technology preview of Solr search in API
+
+-  Documentation: <Coming in Q3>
+
+| 
+
+Ubuntu 14.04 support
+~~~~~~~~~~~~~~~~~~~~
+
+As announced in a recent blog post `"5.3 to come with broader platform
+support and improved
+performance" <http://share.ez.no/blogs/core-development-team/5.3-to-come-with-broader-platform-support-and-improved-performance>`__,
+we have added support for Ubuntu 14.04 LTS, including full support for
+MySQL 5.6, MariaDB 5.5, Nginx 1.4, Apache 2.4 and PHP 5.5
+
+-  Documentation: `Requirements 5.3 <Requirements-5.3_21299647.html>`__
+
+Twig & Tpl Template debug in Symfony Web debug Toolbar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Developer feature known from legacy which allows you to see which
+templates are used on a page, how many times and how much time they
+spend being executed.
+
+-  Documentation: `Templates informations in Web Debug
+   Toolbar <https://doc.ez.no/eZ-Publish/User-manual/5.x/The-Website-Interface/Customization-Guide/Templates-informations-in-Web-Debug-Toolbar>`__
+-  Implementation details: `Original
+   issue <https://jira.ez.no/browse/EZP-22152>`__, `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/695>`__
+
+Admin Interface: Comment moderation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Following the Comments integration `added in
+5.2 <5.2-Changelog_19234955.html>`__ we have in this release exposed
+this also in backend as a tab per content, allowing you to easily get
+access to Disqus moderation per content within backend of eZ Publish.
+
+-  Documentation: `Comments
+   Tab <https://doc.ez.no/eZ-Publish/User-manual/5.x/The-Administration-Interface/The-Content-structure-tab#eztoc131421_0_2_8>`__
+
+Language Switcher
+~~~~~~~~~~~~~~~~~
+
+The language switcher is built on the Symfony stack and is improved for
+a simpler usage.
+
+-  Documentation: `Language
+   Switcher <Language-Switcher_21299899.html>`__
+-  Implementation details: `Original
+   issue <https://jira.ez.no/browse/EZP-22464>`__, `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/834>`__
+
+Location Search API
+~~~~~~~~~~~~~~~~~~~
+
+Tree based "fetches" are now allowed be performed with the new Location
+Search API, allowing generation of tree structures much more easily by
+returning the location instead of content, as done by existing Content
+Search API, and by applying any location filters on the specific
+location instead of *any* of the locations of a Content object.
+
+-  Documentation: `Working with
+   Locations <4.-Working-with-Locations_6292984.html>`__
+-  Implementation details: `Original
+   issue <https://jira.ez.no/browse/EZP-22105>`__ ,\ `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/701>`__
+
+REST API v2 improvements
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+HTTP Cache aware, CORS support and support for OPTIONS method.
+
+-  Documentation: `REST API
+   v2 <https://confluence.ez.no/display/EZP52/eZ+Publish+REST+API>`__
+-  Implementation details: `Issue for HTTP Cache
+   aware <https://jira.ez.no/browse/EZP-21044>`__, `Issue for CORS
+   support <https://jira.ez.no/browse/EZP-21118>`__, `Issue for REST
+   OPTIONS <https://jira.ez.no/browse/EZP-21044>`__, `Pull request for
+   HTTP Cache
+   aware <https://github.com/ezsystems/ezpublish-kernel/pull/659>`__,
+   `Pull request for CORS
+   support <https://github.com/ezsystems/ezpublish-kernel/pull/663>`__,
+   `Pull request for
+   OPTIONS <https://github.com/ezsystems/ezpublish-kernel/pull/653>`__
+
+Search API support for MapLocation Criterion and SortClause
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Search API is now able to search for content with geolocation making it
+possible to do geolocation range searches and sorting by distance from a
+point; on Demo site this is shown using a restaurants-close-to-you page.
+
+-  Documentation: `2. Browsing, finding,
+   viewing#2.Browsing,finding,viewing-Search <6292980.html#id-2.Browsing,finding,viewing-2.Browsing,finding,viewing-Search>`__
+
+-  Implementation details: `Original
+   issue <https://jira.ez.no/browse/EZP-22103>`__, `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/678>`__
+
+Legacy extensions in bundles
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With this new feature mixing legacy and "eZ Platform" needs has become a
+whole lot easier. Easily said it allows you to place legacy extensions
+within a Bundle structure and eZ Publish 5.3+ will make sure it is
+injected into legacy kernel.
+
+Example use case: CommentsBundle with a light admin tab in legacy
+allowing you to moderate comments.
+
+-  Documentation: `Legacy code and features -
+   Legacybundles <Legacy-code-and-features_8323433.html#Legacycodeandfeatures-Legacybundles>`__
+-  Implementation details: `Original
+   issue <https://jira.ez.no/browse/EZP-22210>`__, `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/719>`__
+
+Legacy Website Toolbar
+~~~~~~~~~~~~~~~~~~~~~~
+
+Not to be mixed with the Web Debug Toolbar provided by Symfony and
+extended by eZ Publish, this feature is about allowing "ezwt" (Website
+Toolbar) extension to also work in DemoBundle to provide the front-end
+editing functionality that you know from 4.x.
+
+-  Documentation: `Display the eZ Website
+   Toolbar <Display-the-eZ-Website-Toolbar_21299478.html>`__
+-  Implementation details: `Original JIRA
+   Issue <https://jira.ez.no/browse/EZP-22193>`__, `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/755>`__
+
+Demo Site: Places
+~~~~~~~~~~~~~~~~~
+
+Taking advantage of the MapLocation feature a new feature is exposed in
+the demo showing how to implement listing and map views of content using
+the maplocation field.
+
+-  Documentation: `The MapLocation
+   FieldType <The-MapLocation-FieldType_19235056.html>`__
+-  Implementation details: `Original
+   issue <https://jira.ez.no/browse/EZP-22091>`__, `Original pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/678>`__
+
+Other Improvements
+~~~~~~~~~~~~~~~~~~
+
+-  Lazy services (`issue <https://jira.ez.no/browse/EZP-22133>`__, `pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/676>`__,
+   `symfony
+   documentation <http://symfony.com/doc/current/components/dependency_injection/lazy_services.html>`__)
+-  Configurable IndexPage
+   (`issue <https://jira.ez.no/browse/EZP-22049>`__, `pull
+   request <https://github.com/ezsystems/ezpublish-kernel/pull/664>`__,
+   `documentation <https://confluence.ez.no/display/EZP/Setting+the+Index+Page>`__)
+-  `ez\_is\_field\_empty <ez_is_field_empty_17105612.html>`__, updated
+   to support passing field object as second parameter.
+
+5.3 Contributors
+----------------
+
+For 5.3 we want to reach out a special thank you to those that have
+contributed to this release, especially the brave few who have helped
+out on the "`eZ
+Platform <https://github.com/ezsystems/ezpublish-kernel/graphs/contributors?from=2013-10-30&to=2014-05-15&type=c>`__
+`stack <https://github.com/ezsystems/ezpublish-community/graphs/contributors?from=2013-10-30&to=2014-05-15&type=c>`__":
+
+-  `crevillo <https://github.com/crevillo>`__
+-  `hhamon <https://github.com/hhamon>`__
+-  `bchoquet-heliopsis <https://github.com/bchoquet-heliopsis>`__
+-  `beberlei <https://github.com/beberlei>`__\ ` <https://github.com/beberlei>`__
+-  `is06 <https://github.com/is06>`__
+-  `stof <https://github.com/stof>`__
+-  `kore <https://github.com/kore>`__\ ` <https://github.com/kore>`__
+-  `Plopix <https://github.com/Plopix>`__
+-  `taenadil <https://github.com/taenadil>`__
+-  `iosolinf <https://github.com/iosolinf>`__\ ` <https://github.com/iosolinf>`__
+-  `Djamy <https://github.com/Djamy>`__
+-  `jeromegamez <https://github.com/jeromegamez>`__
+-  `gabriperego <https://github.com/gabriperego>`__
+-  `nlescure <https://github.com/nlescure>`__
+-  `peterkeung <https://github.com/peterkeung>`__
+-  `pborreli <https://github.com/pborreli>`__
+-  `rolebi <https://github.com/rolebi>`__
+-  `emodric <https://github.com/emodric>`__
+-  `dymissy <https://github.com/dymissy>`__\ ` <https://github.com/dymissy>`__
+-  `henningp <https://github.com/henningp>`__
+
+ 
+
+And our two students over this period which has helped on all aspects of
+Platform stack:
+
+-  `StephaneDiot <https://github.com/StephaneDiot>`__
+-  `idriss69 <https://github.com/idriss69>`__
+
+In addition ezpublish-legacy is still receiving a lot of pull requests,
+the also brave contributions to this part of the release can be found
+`here <https://github.com/ezsystems/ezpublish-legacy/graphs/contributors?from=2013-09-30&to=2014-04-04&type=c>`__.
+
+5.3.0 Full Changelog
+--------------------
+
+For the full 5.3 changelog please refer to the `5.3.0
+Changelog <5.3.0-Changelog_19891327.html>`__ dedicated page.
+
+5.3 Known issues
+----------------
+
+The complete list of know issues is available in the `5.3 Known
+issues <Known-issues-in-5.3_19891331.html>`__ page.
+
+ 
+
+Attachments:
+------------
+
+| |image2|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/23527462/23887873.jpg>`__
+(image/jpeg)
+|  |image3| `Ventoux-Square.jpg <attachments/23527462/23887878.jpg>`__
+(image/jpeg)
+|  |image4| `Ventoux-Square.jpg <attachments/23527462/23887877.jpg>`__
+(image/jpeg)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: attachments/23527462/23887877.jpg
+.. |image1| image:: attachments/23527462/23887877.jpg
+.. |image2| image:: images/icons/bullet_blue.gif
+.. |image3| image:: images/icons/bullet_blue.gif
+.. |image4| image:: images/icons/bullet_blue.gif

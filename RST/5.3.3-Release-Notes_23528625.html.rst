@@ -1,0 +1,725 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+#. `5.3 Release Notes <5.3-Release-Notes_23527462.html>`__
+
+eZ Publish Platform 5.x : 5.3.3 Release Notes
+=============================================
+
+Created by bertrand.dunogier@ez.no, last modified by andre.romcke@ez.no
+on Oct 17, 2014
+
+17th October 2014
+                 
+
+eZ announces the availability of 5.3.3, a maintenance release available
+for all users of eZ Publish Platform 5.3 containing a notable few
+`updates and fixes <5.3.3-Release-Notes_23528625.html>`__.
+
+*Worth mentioning in this release are some improvements/fixes to:
+Repository API performance, IO performance, formtoken exceptions,
+preview functionality, asynchronous publishing, content staging, image &
+image alias handling, lazy sessions, and some ESI/hinclude request
+failing because the way SiteAccess info was serialized.*
+
+**
+
+-  `Updating from a previous version of eZ Publish Platform
+   5.3 <#id-5.3.3ReleaseNotes-UpdatingfromapreviousversionofeZPublishPlatform5.3>`__
+
+   -  `1. Patch your composer.json
+      file <#id-5.3.3ReleaseNotes-1.Patchyourcomposer.jsonfile>`__
+   -  `2. Updating Nginx
+      configuration <#id-5.3.3ReleaseNotes-2.UpdatingNginxconfiguration>`__
+   -  `3. Updating Composer Packages
+      selectively <#id-5.3.3ReleaseNotes-3.UpdatingComposerPackagesselectively>`__
+   -  `4. Update the
+      database <#id-5.3.3ReleaseNotes-4.Updatethedatabase>`__
+
+-  `Package updates <#id-5.3.3ReleaseNotes-packagesPackageupdates>`__
+-  `Updates and fixes in this
+   release <#id-5.3.3ReleaseNotes-updatesUpdatesandfixesinthisrelease>`__
+
+| 
+
+Updating from a previous version of eZ Publish Platform 5.3
+-----------------------------------------------------------
+
+| These instructions take advantage of the new
+`Composer <https://getcomposer.org/>`__ powered update systems in 5.3
+for maintenance updates, so make sure you familiarize yourself with the
+`Using Composer <Using-Composer_23527865.html>`__ page.
+| For Upgrading from versions prior to 5.3 look at our `Upgrading from
+5.1 to 5.3 <Upgrading-from-5.1-to-5.3_21299688.html>`__ or `Upgrading
+from 5.2 to 5.3 <Upgrading-from-5.2-to-5.3_19891003.html>`__ page.
+
+1. Patch your composer.json file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Issues with Zeta Components and Composer have been fixed so you should
+edit ``composer.json`` and remove any line with "zetacomponents/" like
+illustrated in *diff* below:
+
+**/composer.json diff**
+
+.. code:: theme:
+
+    diff --git a/composer.json b/composer.json
+    index 3c4fd1e..ffe18af 100644
+    --- a/composer.json
+    +++ b/composer.json
+    @@ -37,25 +37,6 @@
+             "egulias/listeners-debug-command-bundle": "~1.9",
+             "white-october/pagerfanta-bundle": "1.0.*",
+             "nelmio/cors-bundle": "~1.3",
+    -        "zetacomponents/archive": "@dev",
+    -        "zetacomponents/authentication": "@dev",
+    -        "zetacomponents/authentication-database-tiein": "@dev",
+    -        "zetacomponents/base": "@dev",
+    -        "zetacomponents/cache": "@dev",
+    -        "zetacomponents/configuration": "@dev",
+    -        "zetacomponents/console-tools": "@dev",
+    -        "zetacomponents/database": "@dev",
+    -        "zetacomponents/debug": "@dev",
+    -        "zetacomponents/event-log": "@dev",
+    -        "zetacomponents/feed": "@dev",
+    -        "zetacomponents/image-conversion": "@dev",
+    -        "zetacomponents/mail": "@dev",
+    -        "zetacomponents/mvc-tools": "@dev",
+    -        "zetacomponents/mvc-authentication-tiein": "@dev",
+    -        "zetacomponents/persistent-object": "@dev",
+    -        "zetacomponents/php-generator": "@dev",
+    -        "zetacomponents/signal-slot": "@dev",
+    -        "zetacomponents/system-information": "@dev",
+             "hautelook/templated-uri-bundle": "~1.0",
+             "doctrine/doctrine-bundle": "1.2.*"
+         },
+
+2. Updating Nginx configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you're using Nginx as your webserver instead of Apache, then make
+sure to update \ `Nginx vhost
+configuration <https://doc.ez.no/display/EZP/Nginx>`__, changes since
+5.3.0:
+`5.3.1 <https://github.com/ezsystems/ezpublish-community/commit/d157a4ecb3ddf7a382519fbb43ce311335cd8185>`__,
+`5.3.3  <https://github.com/ezsystems/ezpublish-community/commit/db5e0d4af62112e423cac6930f0549364438f756>`__
+
+3. Updating Composer Packages selectively
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With this command you'll only update packages from eZ (and Symfony) that
+have received updates since 5.3.0:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist ezsystems/ezpublish-kernel ezsystems/ezflow-ls-extension ezsystems/demobundle ezsystems/comments-bundle ezsystems/ngsymfonytools-bundle ezsystems/ezpublish-legacy symfony/symfony
+
+Icon
+
+Note: Add "ezsystems/ezfind-ls", "ezsystems/ezcontentstaging-ls" and/or
+"ezsystems/ezsurvey-ls" to the parameters to get latest version if you
+also use these extensions.
+
+4. Update the database
+~~~~~~~~~~~~~~~~~~~~~~
+
+Import to your database the changes provided in:
+
+.. code:: wordwrap
+
+    /<ezp5-root>/ezpublish_legacy/update/database/<mysql|postgresql>/5.3/dbupdate-5.3.2-to-5.3.3.sql
+
+And if you use Cluster (DFS) the following:
+
+.. code:: wordwrap
+
+    /<ezp5-root>/ezpublish_legacy/update/database/mysql/5.3/dbupdate-cluster-5.3.2-to-5.3.3.sql
+
+| 
+
+Package updates
+---------------
+
+Here are the packages that have received an update as part of this
+releases:
+
+package
+
+version
+
+prior version
+
+ezsystems/ezpublish-kernel
+
+5.3.3
+
+5.3.2[.3]
+
+ezsystems/ezpublish-legacy
+
+5.3.3
+
+5.3.2[.1]
+
+ezsystems/ezcontentstaging-ls
+
+5.3.3
+
+5.3.2
+
+ezsystems/ezflow-ls-extension
+
+5.3.3
+
+5.3.2
+
+ezsystems/ezfind-ls
+
+5.3.3
+
+5.3.2
+
+ezsystems/ezsurvey-ls
+
+5.3.3
+
+5.3.1
+
+Other packages that have received update since 5.3.0:
+
+package
+
+version
+
+ezsystems/comments-bundle
+
+5.3.2
+
+ezsystems/demobundle
+
+5.3.2
+
+ezsystems/ngsymfonytools-bundle
+
+1.0.5
+
+symfony/symfony
+
+`>=2.3.19 <http://symfony.com/blog/category/releases>`__
+
+ 
+
+Updates and fixes in this release
+---------------------------------
+
+Key
+
+Summary
+
+Component/s
+
+`EZP-22191 <https://jira.ez.no/browse/EZP-22191>`__
+
+`As a User I expect API's with language filters to respect Always
+available flag <https://jira.ez.no/browse/EZP-22191>`__
+
+Language, Legacy Storage engine, Symfony stack
+
+`EZP-23116 <https://jira.ez.no/browse/EZP-23116>`__
+
+`Change SPI Content Search Handler to return
+ContentInfo <https://jira.ez.no/browse/EZP-23116>`__
+
+Repository & Services (Public API impl), Search
+
+`EZP-22995 <https://jira.ez.no/browse/EZP-22995>`__
+
+`Disable ezformtoken for lowlevel legacy
+fallbacks <https://jira.ez.no/browse/EZP-22995>`__
+
+Extensions/eZ Form Token, Symfony stack
+
+`EZP-23263 <https://jira.ez.no/browse/EZP-23263>`__
+
+`Allow setting section and state during creation of new
+object <https://jira.ez.no/browse/EZP-23263>`__
+
+Administration Interface
+
+`EZP-23296 <https://jira.ez.no/browse/EZP-23296>`__
+
+`Template Block Cache has cache key
+collisions <https://jira.ez.no/browse/EZP-23296>`__
+
+Caching
+
+`EZP-23333 <https://jira.ez.no/browse/EZP-23333>`__
+
+`Improve Content object build speed using SPI
+Cache <https://jira.ez.no/browse/EZP-23333>`__
+
+Repository & Services (Public API impl)
+
+`EZP-23355 <https://jira.ez.no/browse/EZP-23355>`__
+
+`Add a getter for wrappedUser property in
+UserWrapper <https://jira.ez.no/browse/EZP-23355>`__
+
+`EZP-21825 <https://jira.ez.no/browse/EZP-21825>`__
+
+`Temporary files not always deleted when copying from DFS to
+FS <https://jira.ez.no/browse/EZP-21825>`__
+
+Clustering
+
+`EZP-22974 <https://jira.ez.no/browse/EZP-22974>`__
+
+`When I create a new Image I get Error:
+eZDir::recursiveDelete <https://jira.ez.no/browse/EZP-22974>`__
+
+Caching, Misc
+
+`EZP-23019 <https://jira.ez.no/browse/EZP-23019>`__
+
+`Date and Time attribute displays 1st january 1970 when no date is
+set <https://jira.ez.no/browse/EZP-23019>`__
+
+Administration Interface, Legacy Storage engine
+
+`EZP-23066 <https://jira.ez.no/browse/EZP-23066>`__
+
+`Errors when/after trashing content with empty
+image <https://jira.ez.no/browse/EZP-23066>`__
+
+Legacy Storage engine
+
+`EZP-23080 <https://jira.ez.no/browse/EZP-23080>`__
+
+`Updating an image through API fails when using
+DFS <https://jira.ez.no/browse/EZP-23080>`__
+
+Repository & Services (Public API impl)
+
+`EZP-23086 <https://jira.ez.no/browse/EZP-23086>`__
+
+`Image thumbnail not shown on backend if alias contains
+quotes <https://jira.ez.no/browse/EZP-23086>`__
+
+`EZP-23121 <https://jira.ez.no/browse/EZP-23121>`__
+
+`5.2 Role Service API allows duplicate assignments with subtree
+limitations to user group <https://jira.ez.no/browse/EZP-23121>`__
+
+Public API interfaces
+
+`EZP-23124 <https://jira.ez.no/browse/EZP-23124>`__
+
+`eZ Flow block items in v1 of content aren't synced
+correctly <https://jira.ez.no/browse/EZP-23124>`__
+
+Extensions/eZ Content Staging, Extensions/eZ Flow
+
+`EZP-23142 <https://jira.ez.no/browse/EZP-23142>`__
+
+`API Signals are not transaction
+safe <https://jira.ez.no/browse/EZP-23142>`__
+
+Extensions/eZ Find, Legacy IO, Repository & Services (Public API impl),
+Solr search handler
+
+`EZP-23146 <https://jira.ez.no/browse/EZP-23146>`__
+
+`When I step through the setup wizard I get Error:
+eZDir::recursiveDelete <https://jira.ez.no/browse/EZP-23146>`__
+
+Caching, Misc
+
+`EZP-23152 <https://jira.ez.no/browse/EZP-23152>`__
+
+`deleteVersion removes images from published
+version <https://jira.ez.no/browse/EZP-23152>`__
+
+Public API interfaces
+
+`EZP-23168 <https://jira.ez.no/browse/EZP-23168>`__
+
+`ESI or Hinclude request URLs can exceed acceptable size of
+8KB <https://jira.ez.no/browse/EZP-23168>`__
+
+Symfony stack
+
+`EZP-23170 <https://jira.ez.no/browse/EZP-23170>`__
+
+`"swap node" function can swap container and non-container nodes
+(invalid state) <https://jira.ez.no/browse/EZP-23170>`__
+
+Administration Interface, Misc
+
+`EZP-23176 <https://jira.ez.no/browse/EZP-23176>`__
+
+`Lazy sessions are not honored in
+5.3 <https://jira.ez.no/browse/EZP-23176>`__
+
+Symfony stack, Users and Access control
+
+`EZP-23182 <https://jira.ez.no/browse/EZP-23182>`__
+
+`eZOE: Image preview not shown in popup/browse if alias contains
+quotes <https://jira.ez.no/browse/EZP-23182>`__
+
+Extensions/eZ JSCore, Extensions/eZ Online Editor
+
+`EZP-23184 <https://jira.ez.no/browse/EZP-23184>`__
+
+`LegacyHelper doesn't call parent
+constructor <https://jira.ez.no/browse/EZP-23184>`__
+
+Symfony stack
+
+`EZP-23185 <https://jira.ez.no/browse/EZP-23185>`__
+
+`Image not displayed in editor if alias contains
+quotes <https://jira.ez.no/browse/EZP-23185>`__
+
+Extensions/eZ Online Editor
+
+`EZP-23186 <https://jira.ez.no/browse/EZP-23186>`__
+
+`eZFind: Elevation error on
+synchronize <https://jira.ez.no/browse/EZP-23186>`__
+
+Extensions/eZ Find
+
+`EZP-23189 <https://jira.ez.no/browse/EZP-23189>`__
+
+`Composer install/update fails on zetacomponents/base
+requirements <https://jira.ez.no/browse/EZP-23189>`__
+
+Composer
+
+`EZP-23192 <https://jira.ez.no/browse/EZP-23192>`__
+
+`Cannot define array settings in default
+scope <https://jira.ez.no/browse/EZP-23192>`__
+
+Symfony stack
+
+`EZP-23195 <https://jira.ez.no/browse/EZP-23195>`__
+
+`An empty line at the beginning of a Text block will be
+lost <https://jira.ez.no/browse/EZP-23195>`__
+
+Administration Interface, Misc, PlatformUI
+
+`EZP-23206 <https://jira.ez.no/browse/EZP-23206>`__
+
+`Multiple versions with status 'Published' when using asynchronous
+publishing <https://jira.ez.no/browse/EZP-23206>`__
+
+Legacy Storage engine, Misc
+
+`EZP-23207 <https://jira.ez.no/browse/EZP-23207>`__
+
+`Alternative text field of an image attribute is not updated unless the
+file field is updated. <https://jira.ez.no/browse/EZP-23207>`__
+
+Content (images, XML, PDF, RSS, etc.)
+
+`EZP-23208 <https://jira.ez.no/browse/EZP-23208>`__
+
+`async publishing: the polling javascript can get mixed-up and give bad
+results <https://jira.ez.no/browse/EZP-23208>`__
+
+Administration Interface
+
+`EZP-23210 <https://jira.ez.no/browse/EZP-23210>`__
+
+`Exception thrown when using alternative user provider/login
+handler <https://jira.ez.no/browse/EZP-23210>`__
+
+Symfony stack, Users and Access control
+
+`EZP-23211 <https://jira.ez.no/browse/EZP-23211>`__
+
+`Impossible to align multiple
+cells <https://jira.ez.no/browse/EZP-23211>`__
+
+Extensions/eZ Online Editor
+
+`EZP-23218 <https://jira.ez.no/browse/EZP-23218>`__
+
+`password in not stored when a user draft is
+saved <https://jira.ez.no/browse/EZP-23218>`__
+
+Administration Interface
+
+`EZP-23221 <https://jira.ez.no/browse/EZP-23221>`__
+
+`ez\_route() operator in preview causes PHP Fatal
+error <https://jira.ez.no/browse/EZP-23221>`__
+
+`EZP-23222 <https://jira.ez.no/browse/EZP-23222>`__
+
+`LanguageSwitcher does not work in content
+preview <https://jira.ez.no/browse/EZP-23222>`__
+
+Administration Interface, Symfony stack
+
+`EZP-23228 <https://jira.ez.no/browse/EZP-23228>`__
+
+`Wrong translation code for cze <https://jira.ez.no/browse/EZP-23228>`__
+
+Language, Symfony stack
+
+`EZP-23234 <https://jira.ez.no/browse/EZP-23234>`__
+
+`Language Switcher using sub-requests throws an exception in
+preview <https://jira.ez.no/browse/EZP-23234>`__
+
+Symfony stack
+
+`EZP-23249 <https://jira.ez.no/browse/EZP-23249>`__
+
+`Switching siteaccess does not update prioritized
+languages <https://jira.ez.no/browse/EZP-23249>`__
+
+Language
+
+`EZP-23251 <https://jira.ez.no/browse/EZP-23251>`__
+
+`Javascript error trying to paste an iframe html in a literal html
+tag <https://jira.ez.no/browse/EZP-23251>`__
+
+Extensions/eZ Online Editor
+
+`EZP-23253 <https://jira.ez.no/browse/EZP-23253>`__
+
+`XmlText Fieldtype doesn't respect literal tag with class
+html <https://jira.ez.no/browse/EZP-23253>`__
+
+Field types
+
+`EZP-23254 <https://jira.ez.no/browse/EZP-23254>`__
+
+`DFS - tmp files left if the file size is not identical to the original
+one <https://jira.ez.no/browse/EZP-23254>`__
+
+Clustering
+
+`EZP-23257 <https://jira.ez.no/browse/EZP-23257>`__
+
+`ezsurvey: fatal error when instantiating a "related object" survey
+question from cli / rest
+context <https://jira.ez.no/browse/EZP-23257>`__
+
+`EZP-23264 <https://jira.ez.no/browse/EZP-23264>`__
+
+`hasParameter() of LegacyConfigResolver causes an error, if the
+requested parameter does not
+exist. <https://jira.ez.no/browse/EZP-23264>`__
+
+Symfony stack
+
+`EZP-23277 <https://jira.ez.no/browse/EZP-23277>`__
+
+`[Content Staging] Not possible to sync if content language differs from
+parent node's language <https://jira.ez.no/browse/EZP-23277>`__
+
+Extensions/eZ Content Staging
+
+`EZP-23282 <https://jira.ez.no/browse/EZP-23282>`__
+
+`Solr returns wrong results after object language
+deletion <https://jira.ez.no/browse/EZP-23282>`__
+
+Extensions/eZ Find
+
+`EZP-23283 <https://jira.ez.no/browse/EZP-23283>`__
+
+`New stack: urlalias\_iri problem with multi-byte
+URL <https://jira.ez.no/browse/EZP-23283>`__
+
+Misc
+
+`EZP-23295 <https://jira.ez.no/browse/EZP-23295>`__
+
+`Formtoken exception when copying
+subtree <https://jira.ez.no/browse/EZP-23295>`__
+
+Misc
+
+`EZP-23299 <https://jira.ez.no/browse/EZP-23299>`__
+
+`ezpm: adding a subtree with nodeId misses
+children <https://jira.ez.no/browse/EZP-23299>`__
+
+Packages
+
+`EZP-23310 <https://jira.ez.no/browse/EZP-23310>`__
+
+`Preview causes content cache to be purged and
+deadlocks <https://jira.ez.no/browse/EZP-23310>`__
+
+Administration Interface, Database related
+
+`EZP-23312 <https://jira.ez.no/browse/EZP-23312>`__
+
+`Async pub: old processes are filling up the
+database <https://jira.ez.no/browse/EZP-23312>`__
+
+Cronjobs, Database related
+
+`EZP-23313 <https://jira.ez.no/browse/EZP-23313>`__
+
+`Yaml ParseException <https://jira.ez.no/browse/EZP-23313>`__
+
+Composer, Symfony stack
+
+`EZP-23314 <https://jira.ez.no/browse/EZP-23314>`__
+
+`Undefined variable $matcher + matcher should be mandatory in
+config? <https://jira.ez.no/browse/EZP-23314>`__
+
+Symfony stack
+
+`EZP-23316 <https://jira.ez.no/browse/EZP-23316>`__
+
+`AdvancedObjectRelationList: content not
+saved <https://jira.ez.no/browse/EZP-23316>`__
+
+Administration Interface
+
+`EZP-23322 <https://jira.ez.no/browse/EZP-23322>`__
+
+`required object relation list attribute not being
+validated <https://jira.ez.no/browse/EZP-23322>`__
+
+Administration Interface, Legacy Storage engine
+
+`EZP-23332 <https://jira.ez.no/browse/EZP-23332>`__
+
+`Templating Legacy Engine throws warning if TemplateReference is passed
+as param to supports method <https://jira.ez.no/browse/EZP-23332>`__
+
+Template language
+
+`EZP-23335 <https://jira.ez.no/browse/EZP-23335>`__
+
+`Admin preview doesn't use the right
+pagelayout <https://jira.ez.no/browse/EZP-23335>`__
+
+Administration Interface
+
+`EZP-23337 <https://jira.ez.no/browse/EZP-23337>`__
+
+`New stack does not generate 301 redirects for wrongly cased
+URLs <https://jira.ez.no/browse/EZP-23337>`__
+
+Symfony stack
+
+`EZP-23338 <https://jira.ez.no/browse/EZP-23338>`__
+
+`Publishing from preview with asynchronous publisher does not redirect
+to "content is being published" <https://jira.ez.no/browse/EZP-23338>`__
+
+Administration Interface
+
+`EZP-23341 <https://jira.ez.no/browse/EZP-23341>`__
+
+`Incorrect role/policy subtree limitation handling in
+section/assign <https://jira.ez.no/browse/EZP-23341>`__
+
+Administration Interface, Permissions
+
+`EZP-23344 <https://jira.ez.no/browse/EZP-23344>`__
+
+`render\_hinclude not working with
+nginx <https://jira.ez.no/browse/EZP-23344>`__
+
+Documentation
+
+`EZP-23345 <https://jira.ez.no/browse/EZP-23345>`__
+
+`Headings inside tables are rendered with incorrect
+level <https://jira.ez.no/browse/EZP-23345>`__
+
+Content (images, XML, PDF, RSS, etc.)
+
+`EZP-23348 <https://jira.ez.no/browse/EZP-23348>`__
+
+`Misleading error message on deleted embed
+objects <https://jira.ez.no/browse/EZP-23348>`__
+
+Misc
+
+`EZP-23350 <https://jira.ez.no/browse/EZP-23350>`__
+
+`button\_bg.png not found when using admin
+design <https://jira.ez.no/browse/EZP-23350>`__
+
+Extensions/eZ Flow
+
+`EZP-23353 <https://jira.ez.no/browse/EZP-23353>`__
+
+`eZ Find: MySQLi errors in cluster DB when using multiple processes
+(conc > 1) <https://jira.ez.no/browse/EZP-23353>`__
+
+Clustering, Database related, Extensions/eZ Find
+
+`EZP-23363 <https://jira.ez.no/browse/EZP-23363>`__
+
+`When using alternate tree\_root all requests are handled by
+legacycontroller <https://jira.ez.no/browse/EZP-23363>`__
+
+`EZP-23364 <https://jira.ez.no/browse/EZP-23364>`__
+
+`EZP-23337 breaks tree\_root <https://jira.ez.no/browse/EZP-23364>`__
+
+`EZP-23381 <https://jira.ez.no/browse/EZP-23381>`__
+
+`UserService::loadUserGroupsOfUser() checks wrong
+permissions <https://jira.ez.no/browse/EZP-23381>`__
+
+Repository & Services (Public API impl), Users and Access control
+
+`EZP-23384 <https://jira.ez.no/browse/EZP-23384>`__
+
+`Fix ZetaComponents
+dependencies <https://jira.ez.no/browse/EZP-23384>`__
+
+Composer
+
+`EZP-23390 <https://jira.ez.no/browse/EZP-23390>`__
+
+`IOService loads whole file to get mime type with FS cluster
+handler <https://jira.ez.no/browse/EZP-23390>`__
+
+Clustering, Legacy IO
+
+`EZP-23408 <https://jira.ez.no/browse/EZP-23408>`__
+
+`clusterpurge.php not clearing expired images with scope
+"images" <https://jira.ez.no/browse/EZP-23408>`__
+
+Clustering
+
+`71
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=project%3DEZP+AND+fixVersion+in+%28+%225.3.3%22+%29+AND+type+in+%28+Bug%2C+Story%2C+Improvement%29+ORDER+BY+issuetype+DESC%2C+key+ASC+++>`__
+
+ 
+
+ 
+
+Attachments:
+------------
+
+| |image0|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/23528625/23887892.jpg>`__
+(image/jpeg)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: images/icons/bullet_blue.gif

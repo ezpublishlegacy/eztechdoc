@@ -1,0 +1,276 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Reference <Reference_10158191.html>`__
+#. `FieldTypes reference <FieldTypes-reference_10158198.html>`__
+
+eZ Publish Platform 5.x : The DateAndTime FieldType
+===================================================
+
+Created and last modified by petar.spanja@ez.no on May 23, 2014
+
+This FieldType represents a full date including time information.
+
+Name
+
+Internal name
+
+Expected input type
+
+``DateAndTime``
+
+``ezdatetime``
+
+``mixed``
+
+**Table of contents:**
+
+-  `Description <#TheDateAndTimeFieldType-Description>`__
+-  `Input expectations <#TheDateAndTimeFieldType-Inputexpectations>`__
+-  `Value object <#TheDateAndTimeFieldType-Valueobject>`__
+
+   -  `Properties <#TheDateAndTimeFieldType-Properties>`__
+   -  `Constructor <#TheDateAndTimeFieldType-Constructor>`__
+   -  `String
+      representation <#TheDateAndTimeFieldType-Stringrepresentation>`__
+
+-  `Hash format <#TheDateAndTimeFieldType-Hashformat>`__
+-  `Validation <#TheDateAndTimeFieldType-Validation>`__
+-  `Settings <#TheDateAndTimeFieldType-Settings>`__
+
+Description
+-----------
+
+--------------
+
+This FieldType makes possible to store and retrieve a full date
+including time information.
+
+Input expectations
+------------------
+
+--------------
+
+If input value is of type **``string``** or **``integer``**, it will be
+passed directly to the `PHP's built-in **``\DateTime``** class
+constructor <http://www.php.net/manual/en/datetime.construct.php>`__,
+therefore the same input format expectations apply.
+
+It is also possible to directly pass an instance of **``\DateTime``**.
+
+Type
+
+Example
+
+``string``
+
+``"2012-08-28 12:20 Europe/Berlin"``
+
+::
+
+    integer
+
+::
+
+    1346149200
+
+::
+
+    \DateTime
+
+::
+
+    new \DateTime()
+
+Value object
+------------
+
+--------------
+
+Properties
+~~~~~~~~~~
+
+The Value class of this field type contains the following properties:
+
+Property
+
+Type
+
+Description
+
+``$value``
+
+``\DateTime``
+
+The date and time value as an instance of **``\DateTime``**.
+
+Constructor
+~~~~~~~~~~~
+
+The constructor for this value object will initialize a new Value object
+with the value provided. It accepts an instance of PHP's
+built-in \ **``\DateTime``** class.
+
+String representation
+~~~~~~~~~~~~~~~~~~~~~
+
+String representation of the date value will generate the date string in
+the format "D Y-d-m H:i:s" as accepted by \ `PHP's
+built-in \ **``date()``** function <http://www.php.net/manual/en/function.date.php>`__.
+
+Example:
+
+    ``Wed 2013-22-05 12:19:18``
+
+    ````
+
+Hash format
+-----------
+
+--------------
+
+Hash value of this FieldType is an array with two keys:
+
+Key
+
+Type
+
+Description
+
+Example
+
+``timestamp``
+
+``integer``
+
+Time information as a
+`timestamp <http://en.wikipedia.org/wiki/Unix_time>`__.
+
+``1400856992``
+
+``rfc850``
+
+``string``
+
+Time information as a string in `RFC 850 date
+format <http://tools.ietf.org/html/rfc850>`__.
+
+As input, this will have higher precedence over the **``timestamp``**
+value.
+
+``"Friday, 23-May-14 14:56:14 GMT+0000"``
+
+.. code:: theme:
+
+    $hash = array(
+        "timestamp" => 1400856992,
+        "rfc850" => "Friday, 23-May-14 14:56:14 GMT+0000"
+    );
+
+Validation
+----------
+
+--------------
+
+This FieldType does not perform any special validation of the input
+value.
+
+Settings
+--------
+
+--------------
+
+The field definition of this FieldType can be configured with several
+options:
+
+Name
+
+Type
+
+Default value
+
+Description
+
+``useSeconds``
+
+``boolean``
+
+``false``
+
+Used to control displaying of seconds in the output.
+
+::
+
+    defaultType
+
+::
+
+    mixed
+
+::
+
+    Type::DEFAULT_EMPTY
+
+One of the **``DEFAULT_*``** constants, used by the administration
+interface for setting the default field value.
+
+See below for more details.
+
+::
+
+    dateInterval
+
+::
+
+    null|\DateInterval
+
+::
+
+    null
+
+This setting complements **``defaultType``** setting and can be used
+only when latter is set to **``Type::DEFAULT_CURRENT_DATE_ADJUSTED``**.
+
+In that case the default input value when using administration interface
+will be adjusted by the given **``\DateInterval``**.
+
+Following **``defaultType``** default value options are available as
+constants in
+the \ **``eZ\Publish\Core\FieldType\DateAndTime\Type``**\ ** **\ class:
+
+Constant
+
+Description
+
+::
+
+    DEFAULT_EMPTY
+
+Default value will be empty.
+
+::
+
+    DEFAULT_CURRENT_DATE
+
+Default value will use current date.
+
+::
+
+    DEFAULT_CURRENT_DATE_ADJUSTED
+
+Default value will use current date, adjusted by the interval defined in
+**``dateInterval``** setting.
+
+**DateAndTime FieldType example settings**
+
+.. code:: theme:
+
+    use eZ\Publish\Core\FieldType\DateAndTime\Type;
+
+    $settings = array(
+        "useSeconds" => false,
+        "defaultType" => Type::DEFAULT_EMPTY,
+        "dateInterval" => null
+    );
+
+Document generated by Confluence on Mar 03, 2015 15:13

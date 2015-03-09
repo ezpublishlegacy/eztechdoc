@@ -1,0 +1,225 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+#. `5.3 Release Notes <5.3-Release-Notes_23527462.html>`__
+
+eZ Publish Platform 5.x : 5.3.1 Release Notes
+=============================================
+
+Created and last modified by andre.romcke@ez.no on Jul 03, 2014
+
+3rd June 2014
+'''''''''''''
+
+eZ announces the availability of 5.3.1, our first maintenance release
+available for all users of eZ Publish Platform 5.3 containing a notable
+few `updates and fixes <5.3.1-Release-Notes_23527464.html>`__.
+
+Additional fix on Friday June 13th 2014 16:00 CET
+
+Icon
+
+updates.ez.no had a issue affecting composer.lock references to invalid
+eZ packages, this has now been
+`fixed <https://jira.ez.no/browse/EZP-22990>`__ and re running the
+update command shown below and version the updated composer.lock should
+solve the problem.
+
+Updating from a previous version of eZ Publish Platform 5.3
+-----------------------------------------------------------
+
+These instructions take advantage of the
+new \ `composer <https://getcomposer.org/>`__ powered update systems in
+5.3 for maintenance updates, as for Upgrading from versions prior to 5.3
+look at our `Upgrading from 5.1 to
+5.3 <Upgrading-from-5.1-to-5.3_21299688.html>`__ or `Upgrading from 5.2
+to 5.3 <Upgrading-from-5.2-to-5.3_19891003.html>`__ page.
+
+Icon
+
+Before you start, make sure you have Composer installed and familiarize
+yourself with the \ `Using Composer <Using-Composer_23527865.html>`__
+page.
+
+1. Updating Composer Packages selectively:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With this option you will only update the packages from eZ that have had
+updates after 5.3.0:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist ezsystems/ezpublish-kernel ezsystems/ezpublish-legacy ezsystems/ngsymfonytools-bundle
+
+*Note: If your using eZ Find, add "ezsystems/ezfind-ls" to the
+parameters to get latest version.*
+
+2. Updating Nginx configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you're using Nginx as your webserver instead of Apache, then make
+sure to update `Nginx vhost configuration <Nginx_22937706.html>`__.
+
+Package updates in this release
+-------------------------------
+
+Here are the packages that have received an update as part of this
+release:
+
+package
+
+version
+
+::
+
+    ezsystems/ezpublish-kernel
+
+5.3.1
+
+::
+
+    ezsystems/ezpublish-legacy
+
+5.3.1
+
+::
+
+    ezsystems/ezfind-ls
+
+5.3.1
+
+::
+
+    ezsystems/ngsymfonytools-bundle
+
+1.0.4
+
+Updates and fixes in this release
+---------------------------------
+
+Key
+
+Summary
+
+Component/s
+
+`EZP-22907 <https://jira.ez.no/browse/EZP-22907>`__
+
+`Make it possible to prevent automatic login while
+registering <https://jira.ez.no/browse/EZP-22907>`__
+
+Users and Access control
+
+`EZP-22554 <https://jira.ez.no/browse/EZP-22554>`__
+
+`Email error when registering a
+user <https://jira.ez.no/browse/EZP-22554>`__
+
+Notifications
+
+`EZP-22808 <https://jira.ez.no/browse/EZP-22808>`__
+
+`Updating Content with some field types without setting value for them
+will fail <https://jira.ez.no/browse/EZP-22808>`__
+
+Field types, Repository & Services (Public API impl)
+
+`EZP-22836 <https://jira.ez.no/browse/EZP-22836>`__
+
+`Cache not being cleared when creating object
+state <https://jira.ez.no/browse/EZP-22836>`__
+
+Caching
+
+`EZP-22860 <https://jira.ez.no/browse/EZP-22860>`__
+
+`Moving WF event fails if user is not
+valid <https://jira.ez.no/browse/EZP-22860>`__
+
+Workflows
+
+`EZP-22886 <https://jira.ez.no/browse/EZP-22886>`__
+
+`Adding WF event breaks positions if user is not
+valid <https://jira.ez.no/browse/EZP-22886>`__
+
+Administration Interface
+
+`EZP-22915 <https://jira.ez.no/browse/EZP-22915>`__
+
+`Clearing caches fail if cache folder is
+symlinked <https://jira.ez.no/browse/EZP-22915>`__
+
+Caching, Misc
+
+`EZP-22917 <https://jira.ez.no/browse/EZP-22917>`__
+
+`When cache removal fails, no message is
+displayed <https://jira.ez.no/browse/EZP-22917>`__
+
+Caching
+
+`EZP-22924 <https://jira.ez.no/browse/EZP-22924>`__
+
+`eZ Find fetch does not respect limitation
+parameter <https://jira.ez.no/browse/EZP-22924>`__
+
+Extensions/eZ Find
+
+`EZP-22925 <https://jira.ez.no/browse/EZP-22925>`__
+
+`Database setting injection is broken on
+upgrade <https://jira.ez.no/browse/EZP-22925>`__
+
+Database related
+
+`EZP-22928 <https://jira.ez.no/browse/EZP-22928>`__
+
+`Embed inline image are always seen as inline in Online
+Editor <https://jira.ez.no/browse/EZP-22928>`__
+
+Extensions/eZ Online Editor
+
+`EZP-22930 <https://jira.ez.no/browse/EZP-22930>`__
+
+`Search: Remove duplicate
+criterions <https://jira.ez.no/browse/EZP-22930>`__
+
+Legacy Storage engine, Public API interfaces, Search
+
+`EZP-22955 <https://jira.ez.no/browse/EZP-22955>`__
+
+`index\_\*.php files are not passed on to FPM socket/network on
+nginx <https://jira.ez.no/browse/EZP-22955>`__
+
+Documentation
+
+`EZP-22959 <https://jira.ez.no/browse/EZP-22959>`__
+
+`Trailing slash in unordered params not
+removed <https://jira.ez.no/browse/EZP-22959>`__
+
+Misc
+
+`EZP-22961 <https://jira.ez.no/browse/EZP-22961>`__
+
+`Change solr search handler to use SoftCommit by
+default <https://jira.ez.no/browse/EZP-22961>`__
+
+Search, Solr search handler
+
+`15
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=project%3DEZP+AND+fixVersion+in+%28+%225.3.1%22+%29+AND+type+in+%28+Bug%2C+Story%2C+Improvement%29+ORDER+BY+issuetype+DESC%2C+key+ASC+>`__
+
+Attachments:
+------------
+
+| |image0|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/23527464/23887874.jpg>`__
+(image/jpeg)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: images/icons/bullet_blue.gif

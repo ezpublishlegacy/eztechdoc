@@ -1,0 +1,341 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Platform releases <eZ-Platform-releases_26674856.html>`__
+
+eZ Publish Platform 5.x : 15.01 Release Notes
+=============================================
+
+Created and last modified by andre.romcke@ez.no on Mar 03, 2015
+
+Introducing eZ Platform, "15.01"
+--------------------------------
+
+27th February 2015
+''''''''''''''''''
+
++--------------------------------------------------------------------------+
+| |image1|                                                                 |
++--------------------------------------------------------------------------+
+| Welcome to the first release of eZ Platform, 15.01 serves two purposes:  |
+| As first alpha release of eZ Platform, and also as eZ Publish Community  |
+| edition v2015.01 by installing optional legacy packages. Further         |
+| information about eZ Platform (and eZ Studio), and what you can expect,  |
+| can be found in `recent blog post on                                     |
+| ez.no <http://ez.no/Blog/What-to-Expect-from-eZ-Studio-and-eZ-Platform>` |
+| __.                                                                      |
+|                                                                          |
+| Quick links                                                              |
+| ^^^^^^^^^^^                                                              |
+|                                                                          |
+| -  `Install <https://github.com/ezsystems/ezplatform/blob/master/INSTALL |
+| .md>`__                                                                  |
+| -  `Requirements <Requirements-5.4_25985659.html>`__ *(currently same as |
+|    eZ Publish Platform 5.4)*                                             |
+| -  Upgrading: *As this is a pre release, there is no upgrade             |
+|    instructions yet, this will be available starting with the beta,      |
+|    scheduled for "15.05"*                                                |
+|                                                                          |
+| -  Download: *Download* from <link>share.ez.no</link> or see *Install*   |
+|    for how to install via composer                                       |
+|                                                                          |
+                                                                          
++--------------------------------------------------------------------------+
+
+15.1 Highlights
+---------------
+
+Legacy is "gone"
+~~~~~~~~~~~~~~~~
+
+This major milestone is what makes the first release of eZ Platform
+possible. The related libraries, services and configuration have also
+been externalized to a new package,
+`ezsystems/legacy-bridge <https://github.com/ezsystems/legacy-bridge>`__.
+
+Since the product is still in alpha, `legacy can easily be
+re-installed <Installing-eZ-Publish-Legacy-on-top-of-eZ-Platform_26674846.html>`__
+using Composer and a couple lines of configuration, in other words
+legacy has also been tagged for this release.
+
+Ships with Platform UI Bundle v0.5
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Platform UI, `revealed last
+july <http://share.ez.no/blogs/core-development-team/the-future-ez-publish-platform-backend-ui-is-here>`__,
+has received its first tag:
+`v0.5 <https://github.com/ezsystems/PlatformUIBundle/tree/v0.5.0>`__. It
+is pre-installed and pre-configured in this release, and it can be
+accessed via \ ``<example.com>/shell``.
+
+See `blog post from
+December <http://share.ez.no/blogs/core-development-team/platformui-december-2014-status>`__\ for
+further information about the new User Interface.
+
+Prototype of native installer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Since we can't rely on legacy anymore, prototype of a native installer
+has been added, as a console
+script: \ ``ezpublish/console ezplatform:install``. It is meant to be
+very simple, fast, easy to automate, and easy to extend.
+
+15.01 Changelog
+---------------
+
+FIXME: Link or separate page for log, known issues can be inline but
+needs to be checked as most are not relevant for Platform. Changes can
+be found on `our issue tracker <http://jira.ez.no>`__.
+
+Enhancements & features
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Key
+
+Summary
+
+Component/s
+
+`EZP-24048 <https://jira.ez.no/browse/EZP-24048>`__
+
+`Don't clear legacy content cache on symfony
+cache:clear <https://jira.ez.no/browse/EZP-24048>`__
+
+Caching, Legacy bridge, Symfony stack
+
+`EZP-24047 <https://jira.ez.no/browse/EZP-24047>`__
+
+`Allow skipping count db query when using SearchService against
+database <https://jira.ez.no/browse/EZP-24047>`__
+
+Database related, Legacy Storage engine, Public API interfaces, Search
+
+`EZP-24015 <https://jira.ez.no/browse/EZP-24015>`__
+
+`Improve Language Switcher flags and
+logic <https://jira.ez.no/browse/EZP-24015>`__
+
+DemoBundle
+
+`EZP-23949 <https://jira.ez.no/browse/EZP-23949>`__
+
+`Create a simple installation procedure for eZ
+Platform <https://jira.ez.no/browse/EZP-23949>`__
+
+Install
+
+`EZP-23922 <https://jira.ez.no/browse/EZP-23922>`__
+
+`Improve Navigation hub to prevent accidental
+hovers <https://jira.ez.no/browse/EZP-23922>`__
+
+PlatformUI
+
+`EZP-23873 <https://jira.ez.no/browse/EZP-23873>`__
+
+`Change rewrite rules to allow font files to be
+served <https://jira.ez.no/browse/EZP-23873>`__
+
+Documentation
+
+`EZP-23857 <https://jira.ez.no/browse/EZP-23857>`__
+
+`Update doc for changes in default REST auth
+method <https://jira.ez.no/browse/EZP-23857>`__
+
+Documentation
+
+`EZP-23855 <https://jira.ez.no/browse/EZP-23855>`__
+
+`Port ubuntu based containers to
+debian <https://jira.ez.no/browse/EZP-23855>`__
+
+CI System, DemoBundle
+
+`EZP-23847 <https://jira.ez.no/browse/EZP-23847>`__
+
+`Add Role API parameter to get inherited
+RoleAssignments <https://jira.ez.no/browse/EZP-23847>`__
+
+Public API interfaces, Repository & Services (Public API impl)
+
+`EZP-23842 <https://jira.ez.no/browse/EZP-23842>`__
+
+`As a Developer I want preview of Solr powered Location
+Search <https://jira.ez.no/browse/EZP-23842>`__
+
+Search, Solr search handler
+
+Showing 10 out of `32
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=filter%3D15410++++>`__
+
+Bug fixes
+~~~~~~~~~
+
+Key
+
+Summary
+
+Component/s
+
+`EZP-24035 <https://jira.ez.no/browse/EZP-24035>`__
+
+`Fatal error when accessing system info in admin panel
+tab <https://jira.ez.no/browse/EZP-24035>`__
+
+PlatformUI
+
+`EZP-24017 <https://jira.ez.no/browse/EZP-24017>`__
+
+`Security token issue using legacy
+bridge <https://jira.ez.no/browse/EZP-24017>`__
+
+Legacy bridge
+
+`EZP-24010 <https://jira.ez.no/browse/EZP-24010>`__
+
+`Fix PHP version warning: 5.3.3, not just
+5.3 <https://jira.ez.no/browse/EZP-24010>`__
+
+`EZP-23971 <https://jira.ez.no/browse/EZP-23971>`__
+
+`If a user is removed while logged in, session for that user will throw
+an exception <https://jira.ez.no/browse/EZP-23971>`__
+
+Permissions, Users and Access control
+
+`EZP-23953 <https://jira.ez.no/browse/EZP-23953>`__
+
+`Legacy session events not triggered any
+more <https://jira.ez.no/browse/EZP-23953>`__
+
+Legacy IO
+
+`EZP-23935 <https://jira.ez.no/browse/EZP-23935>`__
+
+`Remove hard legacy dependencies from
+DemoBundle <https://jira.ez.no/browse/EZP-23935>`__
+
+DemoBundle
+
+`EZP-23930 <https://jira.ez.no/browse/EZP-23930>`__
+
+`Adapt HttpCache to comply FOSHttpCacheBundle
+1.2 <https://jira.ez.no/browse/EZP-23930>`__
+
+Caching, Symfony stack
+
+`EZP-23928 <https://jira.ez.no/browse/EZP-23928>`__
+
+`Preview cache not being
+updated <https://jira.ez.no/browse/EZP-23928>`__
+
+Caching
+
+`EZP-23927 <https://jira.ez.no/browse/EZP-23927>`__
+
+`HTTP cache issue on premium
+content <https://jira.ez.no/browse/EZP-23927>`__
+
+Caching
+
+`EZP-23923 <https://jira.ez.no/browse/EZP-23923>`__
+
+`ESI/Hinclude URI too long with Compound siteaccess
+matcher <https://jira.ez.no/browse/EZP-23923>`__
+
+Symfony stack
+
+Showing 10 out of `57
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=filter%3D15409++++++>`__
+
+15.01 Known issues
+~~~~~~~~~~~~~~~~~~
+
+Key
+
+Summary
+
+Component/s
+
+`EZP-24050 <https://jira.ez.no/browse/EZP-24050>`__
+
+`The first author is not being pre-filled when creating an object with
+an Author fieldtype <https://jira.ez.no/browse/EZP-24050>`__
+
+PlatformUI
+
+`EZP-24043 <https://jira.ez.no/browse/EZP-24043>`__
+
+`While creating a content, the top menu links are hidden but seems to be
+available <https://jira.ez.no/browse/EZP-24043>`__
+
+PlatformUI
+
+`EZP-24041 <https://jira.ez.no/browse/EZP-24041>`__
+
+`Create / Edit Content close button, on top, is not
+working <https://jira.ez.no/browse/EZP-24041>`__
+
+PlatformUI
+
+`EZP-24040 <https://jira.ez.no/browse/EZP-24040>`__
+
+`Time attribute always has plus 1 hour comparing with the registered
+one <https://jira.ez.no/browse/EZP-24040>`__
+
+PlatformUI
+
+`EZP-24039 <https://jira.ez.no/browse/EZP-24039>`__
+
+`Checkboxes are always checked <https://jira.ez.no/browse/EZP-24039>`__
+
+PlatformUI
+
+`EZP-24038 <https://jira.ez.no/browse/EZP-24038>`__
+
+`Float field does not accept an integer as
+input <https://jira.ez.no/browse/EZP-24038>`__
+
+PlatformUI, REST API v2
+
+`EZP-24024 <https://jira.ez.no/browse/EZP-24024>`__
+
+`Error loading empty authors <https://jira.ez.no/browse/EZP-24024>`__
+
+Symfony stack
+
+`EZP-23977 <https://jira.ez.no/browse/EZP-23977>`__
+
+`Missing feedback when the browser is not able to display an
+image <https://jira.ez.no/browse/EZP-23977>`__
+
+PlatformUI
+
+`8
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=filter%3D15411+++>`__
+
+ 
+
+Attachments:
+------------
+
+| |image2| `iStock\_000032478246XLarge - banner
+doc.jpg <attachments/26674949/26902794.jpg>`__ (image/jpeg)
+|  |image3| `Ventoux-Square.jpg <attachments/26674949/26902795.jpg>`__
+(image/jpeg)
+|  |image4|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/26674949/26902796.jpg>`__
+(image/jpeg)
+|  |image5| `Platform screenshoot
+alpha1.gif <attachments/26674949/26902800.gif>`__ (image/gif)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: attachments/26674949/26902800.gif
+.. |image1| image:: attachments/26674949/26902800.gif
+.. |image2| image:: images/icons/bullet_blue.gif
+.. |image3| image:: images/icons/bullet_blue.gif
+.. |image4| image:: images/icons/bullet_blue.gif
+.. |image5| image:: images/icons/bullet_blue.gif

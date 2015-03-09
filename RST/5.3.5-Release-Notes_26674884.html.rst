@@ -1,0 +1,455 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+#. `5.3 Release Notes <5.3-Release-Notes_23527462.html>`__
+
+eZ Publish Platform 5.x : 5.3.5 Release Notes
+=============================================
+
+Created by andre.romcke@ez.no on Feb 24, 2015
+
+February 28th 2015
+                  
+
+eZ announces the availability of 5.3.5, a maintenance release available
+for all users of eZ Publish Platform 5.3 containing a notable few
+`updates and fixes <5.3.5-Release-Notes_26674884.html>`__.
+
+ 
+
+**
+
+-  `Updating from a previous version of eZ Publish Platform
+   5.3 <#id-5.3.5ReleaseNotes-UpdatingfromapreviousversionofeZPublishPlatform5.3>`__
+
+   -  `1. Remove unneeded dependency causing
+      conflicts  <#id-5.3.5ReleaseNotes-1.Removeunneededdependencycausingconflicts>`__
+   -  `2. Updating Composer Packages
+      selectively <#id-5.3.5ReleaseNotes-2.UpdatingComposerPackagesselectively>`__
+
+-  `Package updates <#id-5.3.5ReleaseNotes-packagesPackageupdates>`__
+-  `Updates and fixes in this
+   release <#id-5.3.5ReleaseNotes-updatesUpdatesandfixesinthisrelease>`__
+
+| 
+
+Updating from a previous version of eZ Publish Platform 5.3
+-----------------------------------------------------------
+
+Icon
+
+Update to \ `5.3.4 <5.3.4-Release-Notes_25985326.html>`__ first before
+you continue with instructions below.
+
+| These instructions take advantage of the new
+`Composer <https://getcomposer.org/>`__ powered update systems in 5.3
+for maintenance updates, so make sure you familiarize yourself with the
+`Using Composer <Using-Composer_23527865.html>`__ page.
+| For Upgrading from versions prior to 5.3 look at our `Upgrading from
+5.1 to 5.3 <Upgrading-from-5.1-to-5.3_21299688.html>`__ or `Upgrading
+from 5.2 to 5.3 <Upgrading-from-5.2-to-5.3_19891003.html>`__ page.
+
+1. Remove unneeded dependency causing conflicts 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Perform the following command to make sure you you are not affected by
+conflicts caused by this package:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar remove behat/mink-selenium-driver --no-update --dev
+
+2. Updating Composer Packages selectively
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With this command you'll only update packages from eZ (and Symfony) that
+have received updates since 5.3.0:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist ezsystems/ezpublish-kernel ezsystems/demobundle ezsystems/ezpublish-legacy symfony/symfony
+
+Icon
+
+Note: Add "ezsystems/ezfind-ls" to the parameters to get latest version
+if you also use this extension.
+
+Package updates
+---------------
+
+Here are the packages that have received an update as part of this
+releases:
+
+package
+
+version
+
+prior version
+
+ezsystems/ezpublish-kernel
+
+5.3.4
+
+5.3.3
+
+ezsystems/ezpublish-legacy
+
+5.3.4
+
+5.3.3
+
+ezsystems/ezfind-ls
+
+5.3.4
+
+5.3.3
+
+Other packages that have received update since 5.3.0:
+
+package
+
+version
+
+ezsystems/comments-bundle
+
+5.3.2
+
+ezsystems/demobundle
+
+5.3.2
+
+ezsystems/ngsymfonytools-bundle
+
+1.0.5
+
+ezsystems/ezflow-ls-extension
+
+5.3.3.1
+
+ezsystems/ezsurvey-ls
+
+5.3.3
+
+ezsystems/ezcontentstaging-ls
+
+5.3.3
+
+symfony/symfony
+
+`>=2.3.19 <http://symfony.com/blog/category/releases>`__
+
+ 
+
+Updates and fixes in this release
+---------------------------------
+
+Key
+
+Summary
+
+Component/s
+
+`EZP-23754 <https://jira.ez.no/browse/EZP-23754>`__
+
+`SPI Cache TrashHandler should clear cache after
+trashing/recovering <https://jira.ez.no/browse/EZP-23754>`__
+
+Caching, SPI interfaces
+
+`EZP-23940 <https://jira.ez.no/browse/EZP-23940>`__
+
+`Decouple search handlers from
+Persistence <https://jira.ez.no/browse/EZP-23940>`__
+
+Legacy Storage engine, Search, Solr search handler
+
+`EZP-23941 <https://jira.ez.no/browse/EZP-23941>`__
+
+`Move field map to storage <https://jira.ez.no/browse/EZP-23941>`__
+
+Legacy Storage engine, Search, Solr search handler
+
+`EZP-24047 <https://jira.ez.no/browse/EZP-24047>`__
+
+`Allow skipping count db query when using SearchService against
+database <https://jira.ez.no/browse/EZP-24047>`__
+
+Database related, Legacy Storage engine, Public API interfaces, Search
+
+`EZP-24048 <https://jira.ez.no/browse/EZP-24048>`__
+
+`Don't clear legacy content cache on symfony
+cache:clear <https://jira.ez.no/browse/EZP-24048>`__
+
+Caching, Legacy bridge, Symfony stack
+
+`EZP-24092 <https://jira.ez.no/browse/EZP-24092>`__
+
+`Optimize queries to not perform count when not
+needed <https://jira.ez.no/browse/EZP-24092>`__
+
+DemoBundle, Search
+
+`EZP-21586 <https://jira.ez.no/browse/EZP-21586>`__
+
+`ContentTypeService::createContentType() does not check for any
+permissions <https://jira.ez.no/browse/EZP-21586>`__
+
+Permissions, Public API interfaces, Repository & Services (Public API
+impl)
+
+`EZP-21605 <https://jira.ez.no/browse/EZP-21605>`__
+
+`Version history Status column is missing
+data <https://jira.ez.no/browse/EZP-21605>`__
+
+Administration Interface
+
+`EZP-21686 <https://jira.ez.no/browse/EZP-21686>`__
+
+`ezinfo/copyright has extra "\\" that don't allow the links to
+work <https://jira.ez.no/browse/EZP-21686>`__
+
+`EZP-23129 <https://jira.ez.no/browse/EZP-23129>`__
+
+`Search API: sorting by field filters the
+results <https://jira.ez.no/browse/EZP-23129>`__
+
+Repository & Services (Public API impl), Search
+
+`EZP-23278 <https://jira.ez.no/browse/EZP-23278>`__
+
+`[Content Staging] Sync fails if you try to use the copy of an
+object <https://jira.ez.no/browse/EZP-23278>`__
+
+Extensions/eZ Content Staging
+
+`EZP-23280 <https://jira.ez.no/browse/EZP-23280>`__
+
+`[PHP-FPM&Apache] Server fault when logging to administration
+interface <https://jira.ez.no/browse/EZP-23280>`__
+
+Administration Interface
+
+`EZP-23302 <https://jira.ez.no/browse/EZP-23302>`__
+
+`Update Location fails if no change is performed with the
+update <https://jira.ez.no/browse/EZP-23302>`__
+
+Repository & Services (Public API impl)
+
+`EZP-23403 <https://jira.ez.no/browse/EZP-23403>`__
+
+`Fix implementation of Persistence\\Solr\\Slot\\MoveUserGroup
+slot <https://jira.ez.no/browse/EZP-23403>`__
+
+Search
+
+`EZP-23513 <https://jira.ez.no/browse/EZP-23513>`__
+
+`in eZXMLText, a <P> tag is being add to a link when it surrounds an
+image <https://jira.ez.no/browse/EZP-23513>`__
+
+Extensions/eZ Online Editor
+
+`EZP-23624 <https://jira.ez.no/browse/EZP-23624>`__
+
+`Unable to change base translation when editing
+content <https://jira.ez.no/browse/EZP-23624>`__
+
+Administration Interface
+
+`EZP-23701 <https://jira.ez.no/browse/EZP-23701>`__
+
+`table cell valign property in XmlText is not properly
+rendered <https://jira.ez.no/browse/EZP-23701>`__
+
+Design (templates, CSS, etc.), Field types, Symfony stack
+
+`EZP-23739 <https://jira.ez.no/browse/EZP-23739>`__
+
+`Files uploaded with multiupload will be download with the wrong
+Content-Type <https://jira.ez.no/browse/EZP-23739>`__
+
+Extensions/eZ MultiUpload
+
+`EZP-23747 <https://jira.ez.no/browse/EZP-23747>`__
+
+`Staging: whitespace in a a required text block field causes sync
+failure <https://jira.ez.no/browse/EZP-23747>`__
+
+Extensions/eZ Content Staging
+
+`EZP-23753 <https://jira.ez.no/browse/EZP-23753>`__
+
+`Incorrect node UrlAlias for (partially) untranslated
+objects <https://jira.ez.no/browse/EZP-23753>`__
+
+`EZP-23803 <https://jira.ez.no/browse/EZP-23803>`__
+
+`Fake draft users can be created to prevent someone to
+login <https://jira.ez.no/browse/EZP-23803>`__
+
+Users and Access control
+
+`EZP-23812 <https://jira.ez.no/browse/EZP-23812>`__
+
+`vertical align in table cells is not visible in the
+editor <https://jira.ez.no/browse/EZP-23812>`__
+
+Extensions/eZ Online Editor
+
+`EZP-23829 <https://jira.ez.no/browse/EZP-23829>`__
+
+`Paragraph alignment ignored in legacy rendered
+frontend <https://jira.ez.no/browse/EZP-23829>`__
+
+Design (templates, CSS, etc.)
+
+`EZP-23834 <https://jira.ez.no/browse/EZP-23834>`__
+
+`Cached ESI can not be shared among pages because of inner
+request <https://jira.ez.no/browse/EZP-23834>`__
+
+Caching, Symfony stack
+
+`EZP-23835 <https://jira.ez.no/browse/EZP-23835>`__
+
+`indexcontent.php cronjob pgsql columns must appear in group
+by <https://jira.ez.no/browse/EZP-23835>`__
+
+Cronjobs
+
+`EZP-23840 <https://jira.ez.no/browse/EZP-23840>`__
+
+`eZFind: incorrect error handling in elevate
+configuration <https://jira.ez.no/browse/EZP-23840>`__
+
+`EZP-23870 <https://jira.ez.no/browse/EZP-23870>`__
+
+`Async publishing reverts
+expiry.php <https://jira.ez.no/browse/EZP-23870>`__
+
+Caching
+
+`EZP-23872 <https://jira.ez.no/browse/EZP-23872>`__
+
+`Query exception thrown when no language configured in
+siteaccess <https://jira.ez.no/browse/EZP-23872>`__
+
+Legacy IO
+
+`EZP-23879 <https://jira.ez.no/browse/EZP-23879>`__
+
+`ezinfo shows wrong copyright info after move to
+composer <https://jira.ez.no/browse/EZP-23879>`__
+
+Composer
+
+`EZP-23884 <https://jira.ez.no/browse/EZP-23884>`__
+
+`Nginx template misses semicolon for most of the
+fastcgi\_params <https://jira.ez.no/browse/EZP-23884>`__
+
+Documentation
+
+`EZP-23889 <https://jira.ez.no/browse/EZP-23889>`__
+
+`RestProvider must check that is\_rest\_request is
+true <https://jira.ez.no/browse/EZP-23889>`__
+
+REST API v2
+
+`EZP-23904 <https://jira.ez.no/browse/EZP-23904>`__
+
+`ezpublish\_legacy\_sso causes infinite redirect loop on
+/login <https://jira.ez.no/browse/EZP-23904>`__
+
+Users and Access control
+
+`EZP-23906 <https://jira.ez.no/browse/EZP-23906>`__
+
+`The Public API allows to create content under a non container
+element <https://jira.ez.no/browse/EZP-23906>`__
+
+Repository & Services (Public API impl), REST API v2
+
+`EZP-23908 <https://jira.ez.no/browse/EZP-23908>`__
+
+`expiry.php race condition <https://jira.ez.no/browse/EZP-23908>`__
+
+Caching
+
+`EZP-23923 <https://jira.ez.no/browse/EZP-23923>`__
+
+`ESI/Hinclude URI too long with Compound siteaccess
+matcher <https://jira.ez.no/browse/EZP-23923>`__
+
+Symfony stack
+
+`EZP-23928 <https://jira.ez.no/browse/EZP-23928>`__
+
+`Preview cache not being
+updated <https://jira.ez.no/browse/EZP-23928>`__
+
+Caching
+
+`EZP-23953 <https://jira.ez.no/browse/EZP-23953>`__
+
+`Legacy session events not triggered any
+more <https://jira.ez.no/browse/EZP-23953>`__
+
+Legacy IO
+
+`EZP-23971 <https://jira.ez.no/browse/EZP-23971>`__
+
+`If a user is removed while logged in, session for that user will throw
+an exception <https://jira.ez.no/browse/EZP-23971>`__
+
+Permissions, Users and Access control
+
+`EZP-23978 <https://jira.ez.no/browse/EZP-23978>`__
+
+`URLs in legacy\_mode lose siteaccess uri when index\_page is
+used <https://jira.ez.no/browse/EZP-23978>`__
+
+Legacy bridge, Symfony stack
+
+`EZP-23981 <https://jira.ez.no/browse/EZP-23981>`__
+
+`Faulty embed-inline handling (arrow key
+navigation) <https://jira.ez.no/browse/EZP-23981>`__
+
+Extensions/eZ Online Editor
+
+`EZP-24010 <https://jira.ez.no/browse/EZP-24010>`__
+
+`Fix PHP version warning: 5.3.3, not just
+5.3 <https://jira.ez.no/browse/EZP-24010>`__
+
+`EZP-24017 <https://jira.ez.no/browse/EZP-24017>`__
+
+`Security token issue using legacy
+bridge <https://jira.ez.no/browse/EZP-24017>`__
+
+Legacy bridge
+
+`42
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=project%3DEZP+AND+fixVersion+in+%28+%225.3.5%22+%29+AND+type+in+%28+Bug%2C+Story%2C+Improvement%29+ORDER+BY+issuetype+DESC%2C+key+ASC++>`__
+
+ 
+
+ 
+
+Attachments:
+------------
+
+| |image0|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/26674884/26902760.jpg>`__
+(image/jpeg)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: images/icons/bullet_blue.gif

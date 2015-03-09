@@ -1,0 +1,479 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+#. `5.3 Release Notes <5.3-Release-Notes_23527462.html>`__
+
+eZ Publish Platform 5.x : 5.3.2 Release Notes
+=============================================
+
+Created and last modified by andre.romcke@ez.no on Sep 26, 2014
+
+16th July 2014
+''''''''''''''
+
+eZ announces the availability of 5.3.2, a maintenance release available
+for all users of eZ Publish Platform 5.3 containing a notable few
+`updates and fixes <5.3.2-Release-Notes_23528040.html>`__, as well as a
+`security update in
+Symfony <http://symfony.com/blog/security-releases-cve-2014-4931-symfony-2-3-18-2-4-8-and-2-5-2-released>`__.
+
+5.3.2.x Micro updates
+
+Icon
+
+Additional Symfony `2.3.19 security
+update <http://symfony.com/blog/symfony-2-3-19-released>`__ came on
+September 3rd with a small break in how yml files are parsed,
+ezpublish-kernel package was updated to v5.3.2.1 on September 4th to fix
+the `issue <https://jira.ez.no/browse/EZP-23313>`__. On September 26th
+ezpublish-kernel v5.3.2.2 came out to address some Composer issues with
+Zeta Components, further fixes is expected in v5.3.3.
+
+Updating from a previous version of eZ Publish Platform 5.3
+-----------------------------------------------------------
+
+These instructions take advantage of the new
+`composer <https://getcomposer.org/>`__ powered update systems in 5.3
+for maintenance updates, as for Upgrading from versions prior to 5.3
+look at our `Upgrading from 5.1 to
+5.3 <Upgrading-from-5.1-to-5.3_21299688.html>`__ or `Upgrading from 5.2
+to 5.3 <Upgrading-from-5.2-to-5.3_19891003.html>`__ page.
+
+Icon
+
+Before you start, make sure you have Composer installed and familiarize
+yourself with the `Using Composer <Using-Composer_23527865.html>`__
+page, also if upgrading from 5.3.0 and using Nginx make sure to upgrade
+your configuration as described in `5.3.1 Release
+Notes <5.3.1-Release-Notes_23527464.html>`__.
+
+Updating Composer Packages selectively:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With this command you'll only update packages from eZ (and symfony) that
+have received updates since 5.3.0:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist ezsystems/ezpublish-kernel ezsystems/ezpublish-legacy ezsystems/demobundle ezsystems/comments-bundle symfony/symfony
+
+*Note: Add "ezsystems/ezfind-ls", and
+"*\ ezsystems/ezcontentstaging-ls\ *" to the parameters to get latest
+version if you also use these extensions.*
+
+Package updates in this release
+-------------------------------
+
+Here are the packages that have received an update as part of this
+release + security update in Symfony:
+
+package
+
+version
+
+prior version
+
+::
+
+    ezsystems/ezpublish-kernel
+
+5.3.2.2
+
+5.3.1
+
+::
+
+    ezsystems/ezpublish-legacy
+
+5.3.2
+
+5.3.1
+
+::
+
+    ezsystems/ezfind-ls
+
+5.3.2
+
+5.3.1
+
+::
+
+    ezsystems/demobundle
+
+5.3.2
+
+5.3.0
+
+::
+
+    ezsystems/ezcontentstaging-ls
+
+5.3.2
+
+5.3.0
+
+``ezsystems/comments-bundle``
+
+5.3.2
+
+5.3.0
+
+symfony/symfony
+
+`>=2.3.18 <http://symfony.com/blog/category/releases>`__
+
+2.3.13
+
+Notable known issues in this release:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some issues have been identified in this release which should be
+mentioned specifically:
+
+-  `|image0|\ EZP-23019 <https://jira.ez.no/browse/EZP-23019>`__ - Date
+   and Time attribute displays 1st january 1970 when no date is set
+   Closed
+-  `|image1|\ EZP-23159 <https://jira.ez.no/browse/EZP-23159>`__ -
+   Composer install/update sometimes have Fatal error during asset dump
+   step Backlog
+-  `|image2|\ EZP-23189 <https://jira.ez.no/browse/EZP-23189>`__ -
+   Composer install/update fails on zetacomponents/base requirements
+   Closed
+
+ 
+
+Updates and fixes in this release
+---------------------------------
+
+Key
+
+Summary
+
+Component/s
+
+`EZP-22548 <https://jira.ez.no/browse/EZP-22548>`__
+
+`As an editor I want to know all I can about the comment
+features <https://jira.ez.no/browse/EZP-22548>`__
+
+Documentation
+
+`EZP-23084 <https://jira.ez.no/browse/EZP-23084>`__
+
+`When authenticating, user should be redirected to DefaultPage if
+set <https://jira.ez.no/browse/EZP-23084>`__
+
+Symfony stack, Users and Access control
+
+`EZP-22776 <https://jira.ez.no/browse/EZP-22776>`__
+
+`Implement missing NewState
+Limitation <https://jira.ez.no/browse/EZP-22776>`__
+
+Permissions
+
+`EZP-23001 <https://jira.ez.no/browse/EZP-23001>`__
+
+`As a <5.3 user I would like to test 5.3 incl
+composer <https://jira.ez.no/browse/EZP-23001>`__
+
+Composer, Extensions/eZ Network
+
+`EZP-23053 <https://jira.ez.no/browse/EZP-23053>`__
+
+`Provide more information on FieldType not found
+exceptions <https://jira.ez.no/browse/EZP-23053>`__
+
+Field types, Public API interfaces, Repository & Services (Public API
+impl)
+
+`EZP-23122 <https://jira.ez.no/browse/EZP-23122>`__
+
+`Inline document support for custom tag
+names <https://jira.ez.no/browse/EZP-23122>`__
+
+Extensions/eZ Online Editor
+
+`EZP-23134 <https://jira.ez.no/browse/EZP-23134>`__
+
+`Cache content load calls with
+translations <https://jira.ez.no/browse/EZP-23134>`__
+
+Caching, SPI interfaces
+
+`EZP-21847 <https://jira.ez.no/browse/EZP-21847>`__
+
+`cannot generate autoloads/execute ezpublish:legacy:script if
+ezxFormToken class isn't found <https://jira.ez.no/browse/EZP-21847>`__
+
+Extensions/eZ Form Token, Symfony stack
+
+`EZP-22454 <https://jira.ez.no/browse/EZP-22454>`__
+
+`Write CommentsBundle backoffice UI end-user
+doc <https://jira.ez.no/browse/EZP-22454>`__
+
+Documentation
+
+`EZP-22546 <https://jira.ez.no/browse/EZP-22546>`__
+
+`Internal Server Error when uploading a file in a "Object Relations"
+attribute <https://jira.ez.no/browse/EZP-22546>`__
+
+Administration Interface, Extensions/eZ JSCore
+
+`EZP-22552 <https://jira.ez.no/browse/EZP-22552>`__
+
+`REST Creating View returns 500
+error <https://jira.ez.no/browse/EZP-22552>`__
+
+REST API v2
+
+`EZP-22609 <https://jira.ez.no/browse/EZP-22609>`__
+
+`Access to /user/login should redirect to new login
+resource <https://jira.ez.no/browse/EZP-22609>`__
+
+DemoBundle
+
+`EZP-22615 <https://jira.ez.no/browse/EZP-22615>`__
+
+`Not possible to remove an image from an
+object <https://jira.ez.no/browse/EZP-22615>`__
+
+Content (images, XML, PDF, RSS, etc.)
+
+`EZP-22775 <https://jira.ez.no/browse/EZP-22775>`__
+
+`[API] Permissions should handle missing limitations
+better <https://jira.ez.no/browse/EZP-22775>`__
+
+Permissions, Repository & Services (Public API impl)
+
+`EZP-22781 <https://jira.ez.no/browse/EZP-22781>`__
+
+`Exception when loading content with image with '/images-versioned/'
+path <https://jira.ez.no/browse/EZP-22781>`__
+
+Content (images, XML, PDF, RSS, etc.), Legacy IO
+
+`EZP-22818 <https://jira.ez.no/browse/EZP-22818>`__
+
+`eZ Content Staging is not syncing child
+objects <https://jira.ez.no/browse/EZP-22818>`__
+
+Extensions/eZ Content Staging
+
+`EZP-22840 <https://jira.ez.no/browse/EZP-22840>`__
+
+`Error : Argument '$object' is invalid: Must be of type:
+ContentCreateStruct, ... <https://jira.ez.no/browse/EZP-22840>`__
+
+Permissions, Repository & Services (Public API impl)
+
+`EZP-22859 <https://jira.ez.no/browse/EZP-22859>`__
+
+`Object Relations versions not saved correctly in
+Solr <https://jira.ez.no/browse/EZP-22859>`__
+
+Extensions/eZ Find
+
+`EZP-22863 <https://jira.ez.no/browse/EZP-22863>`__
+
+`Problem with the fix of
+EZP-22480 <https://jira.ez.no/browse/EZP-22863>`__
+
+Misc
+
+`EZP-22909 <https://jira.ez.no/browse/EZP-22909>`__
+
+`Check file consistency failure on
+share/filelist.md5 <https://jira.ez.no/browse/EZP-22909>`__
+
+Upgrading
+
+`EZP-22913 <https://jira.ez.no/browse/EZP-22913>`__
+
+`Removing version image aliases causes MySQL timeouts due to extremely
+high amount of queries. <https://jira.ez.no/browse/EZP-22913>`__
+
+Database related, Legacy Storage engine
+
+`EZP-22923 <https://jira.ez.no/browse/EZP-22923>`__
+
+`ezcontentobject\_link table not cleared when a relations attribute is
+deleted from a class <https://jira.ez.no/browse/EZP-22923>`__
+
+Database related
+
+`EZP-22937 <https://jira.ez.no/browse/EZP-22937>`__
+
+`Unable to get the width of a table pasted from
+Excel <https://jira.ez.no/browse/EZP-22937>`__
+
+Administration Interface, Extensions/eZ Online Editor
+
+`EZP-22964 <https://jira.ez.no/browse/EZP-22964>`__
+
+`5.x API contentUpdate for eZXml adds entry to ezurl, but not to
+ezurl\_object\_link <https://jira.ez.no/browse/EZP-22964>`__
+
+Public API interfaces
+
+`EZP-22969 <https://jira.ez.no/browse/EZP-22969>`__
+
+`Updating Content with Xml-/RichText adds entry to ezurl, but not to
+ezurl\_object\_link <https://jira.ez.no/browse/EZP-22969>`__
+
+Field types, Legacy Storage engine
+
+`EZP-22990 <https://jira.ez.no/browse/EZP-22990>`__
+
+`[Satis] composer install fails with 404 Not
+Found <https://jira.ez.no/browse/EZP-22990>`__
+
+Composer, Upgrading
+
+`EZP-22999 <https://jira.ez.no/browse/EZP-22999>`__
+
+`XmlText and RichText do not implement
+FieldStorage::deleteFieldData() <https://jira.ez.no/browse/EZP-22999>`__
+
+Field types, Legacy Storage engine
+
+`EZP-23004 <https://jira.ez.no/browse/EZP-23004>`__
+
+`[CommentsBundle] Comments providers should be marked
+lazy <https://jira.ez.no/browse/EZP-23004>`__
+
+Extensions/eZ Comments
+
+`EZP-23025 <https://jira.ez.no/browse/EZP-23025>`__
+
+`Page field type Block can't be rendered using ESI
+strategy <https://jira.ez.no/browse/EZP-23025>`__
+
+Field types, Symfony stack
+
+`EZP-23028 <https://jira.ez.no/browse/EZP-23028>`__
+
+`eZObjectRelationList not considering the selected
+object <https://jira.ez.no/browse/EZP-23028>`__
+
+Administration Interface
+
+`EZP-23033 <https://jira.ez.no/browse/EZP-23033>`__
+
+`DefaultPage setting injected from eZ5 into legacy, but it can not be
+set via yml configuration <https://jira.ez.no/browse/EZP-23033>`__
+
+`EZP-23037 <https://jira.ez.no/browse/EZP-23037>`__
+
+`Subtree criterion in content search does not scale (MySQL
+timeouts) <https://jira.ez.no/browse/EZP-23037>`__
+
+Repository & Services (Public API impl)
+
+`EZP-23046 <https://jira.ez.no/browse/EZP-23046>`__
+
+`Pagelayout overrides for some kernel errors only work
+once <https://jira.ez.no/browse/EZP-23046>`__
+
+`EZP-23056 <https://jira.ez.no/browse/EZP-23056>`__
+
+`Use locationSearch for topmenu instead of deprecated
+SortClause\\Location <https://jira.ez.no/browse/EZP-23056>`__
+
+DemoBundle
+
+`EZP-23057 <https://jira.ez.no/browse/EZP-23057>`__
+
+`viewContent response misses the
+X-Location-Id <https://jira.ez.no/browse/EZP-23057>`__
+
+Symfony stack
+
+`EZP-23064 <https://jira.ez.no/browse/EZP-23064>`__
+
+`Legacy script doesn't always receive --siteaccess
+option <https://jira.ez.no/browse/EZP-23064>`__
+
+Extensions/eZ Find, Solr search handler, Symfony stack
+
+`EZP-23071 <https://jira.ez.no/browse/EZP-23071>`__
+
+`Clicking on the eZIE edit button doesn't do
+anything <https://jira.ez.no/browse/EZP-23071>`__
+
+Extensions/eZ Image Editor, Extensions/eZ JSCore
+
+`EZP-23074 <https://jira.ez.no/browse/EZP-23074>`__
+
+`Missing form token meta tags when browsing legacy
+modules <https://jira.ez.no/browse/EZP-23074>`__
+
+Extensions/eZ Form Token, Extensions/eZ Image Editor, Symfony stack
+
+`EZP-23088 <https://jira.ez.no/browse/EZP-23088>`__
+
+`Image information still displayed after
+removal <https://jira.ez.no/browse/EZP-23088>`__
+
+Administration Interface
+
+`EZP-23118 <https://jira.ez.no/browse/EZP-23118>`__
+
+`After updating to 5.3.2, version still shows
+5.3.1 <https://jira.ez.no/browse/EZP-23118>`__
+
+Install, Upgrading
+
+`EZP-23126 <https://jira.ez.no/browse/EZP-23126>`__
+
+`eZ Publish 5.3: redirect to /login on legacy mode returns module not
+found <https://jira.ez.no/browse/EZP-23126>`__
+
+Legacy IO
+
+`EZP-23141 <https://jira.ez.no/browse/EZP-23141>`__
+
+`5.3.2 Release notes mentions Symfony 2.3.16, when it should mention
+2.3.<latests> <https://jira.ez.no/browse/EZP-23141>`__
+
+Documentation
+
+`EZP-23155 <https://jira.ez.no/browse/EZP-23155>`__
+
+`5.3 Documentation went missing <https://jira.ez.no/browse/EZP-23155>`__
+
+Documentation
+
+`EZP-23313 <https://jira.ez.no/browse/EZP-23313>`__
+
+`Yaml ParseException <https://jira.ez.no/browse/EZP-23313>`__
+
+Composer, Symfony stack
+
+`44
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=project%3DEZP+AND+fixVersion+in+%28+%225.3.2%22%2C+%225.3.2.1%22+%29+AND+type+in+%28+Bug%2C+Story%2C+Improvement%29+ORDER+BY+issuetype+DESC%2C+key+ASC+++>`__
+
+ 
+
+ 
+
+Attachments:
+------------
+
+| |image3|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/23528040/23887885.jpg>`__
+(image/jpeg)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+.. |image1| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+.. |image2| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+.. |image3| image:: images/icons/bullet_blue.gif
