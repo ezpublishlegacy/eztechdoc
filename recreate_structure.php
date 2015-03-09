@@ -19,6 +19,7 @@ foreach (glob( "RST/*.rst" ) as $rstFilePath) {
     }
     $contents = file_get_contents( $rstFilePath );
     fixupSplittedLines( $contents );
+    fixupToc( $contents );
     $targetPath = "$pageDirectoryPath/$filename";
     file_put_contents( $targetPath, $contents );
     echo "- $rstFilePath -> $targetPath\n";
@@ -58,12 +59,12 @@ function computeFilename( $path )
         }
     }
 
-    return strtolower( str_replace( '-', '_', $title ) ) . '.rst';
+    return strtolower( str_replace( ['-', ' '], '_', $title ) ) . '.rst';
 }
 
 function fixupSplittedLines( &$text )
 {
-    $text = preg_replace( '/(\s+)-  \`(.+)$\s+(.+)\`__/m', '\1- `\2 \3`__', $text );
+    $text = preg_replace( '/([ ]+)-([ ]+)`([^`]+)\n[ ]+([^`]+)`__/m', '\1-\2`\3 \4`__', $text );
 }
 
 function figureOutTitle( $path )
@@ -74,4 +75,10 @@ function figureOutTitle( $path )
     } else {
         return false;
     }
+}
+
+function fixupToc( &$text )
+{
+    $text = preg_replace(
+        '/(\s*-  (`[^\n]+`__[\n]{1,2}))+/m', "\n\n.. contents::\n\n", $text );
 }
