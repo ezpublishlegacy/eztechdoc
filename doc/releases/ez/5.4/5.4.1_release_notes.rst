@@ -1,0 +1,734 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+#. `5.4 Release Notes <5.4-Release-Notes_25985407.html>`__
+
+eZ Publish Platform 5.x : 5.4.1 Release Notes
+=============================================
+
+Created and last modified by andre.romcke@ez.no on Jan 17, 2015
+
+January 16th 2015
+                 
+
+eZ announces the availability of 5.4.1, a maintenance release available
+for all users of eZ Publish Platform 5.4 containing a notable few
+`updates and fixes <5.4.1-Release-Notes_26673271.html>`__, most notably
+the update to Symfony 2.6.
+
+ 
+
+**
+
+-  `Updating from a previous version of eZ Publish Platform
+   5.4 <#id-5.4.1ReleaseNotes-UpdatingfromapreviousversionofeZPublishPlatform5.4>`__
+
+   -  `1. Update to Symfony
+      2.6 <#id-5.4.1ReleaseNotes-1.UpdatetoSymfony2.6>`__
+   -  `2. Updating Composer Packages
+      selectively <#id-5.4.1ReleaseNotes-2.UpdatingComposerPackagesselectively>`__
+
+-  `Package updates <#id-5.4.1ReleaseNotes-packagesPackageupdates>`__
+-  `Updates and fixes in this
+   release <#id-5.4.1ReleaseNotes-updatesUpdatesandfixesinthisrelease>`__
+
+| 
+
+Updating from a previous version of eZ Publish Platform 5.4
+-----------------------------------------------------------
+
+| These instructions take advantage
+of \ `Composer <https://getcomposer.org/>`__ for maintenance updates,
+so make sure you familiarize yourself with the `Using
+Composer <Using-Composer_23527865.html>`__ page.
+| For Upgrading from versions prior to 5.4 look at our `Upgrading from
+5.2 to 5.4 <Upgrading-from-5.2-to-5.4_25985649.html>`__ or `Upgrading
+from 5.3 to 5.4 <Upgrading-from-5.3-to-5.4_25985666.html>`__ page.
+
+1. Update to Symfony 2.6
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Get the `waste
+amount <http://symfony.com/blog/symfony-2-6-0-beta1-released>`__ of
+***D**\ eveloper e\ **X**\ perience* improvements in `Symfony
+2.6 <http://symfony.com/blog/symfony-2-6-0-released>`__, including eZ
+specific issues like 
+`|image0|\ EZP-23489 <https://jira.ez.no/browse/EZP-23489>`__ - Symfony
+2.6: Make assets install scripts smarter with symlinks Closed  which
+builds on this work.
+
+Perform the following command to make sure you get Symfony 2.6 in update
+command below:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar require symfony/symfony:~2.6.1 --no-update
+
+2. Updating Composer Packages selectively
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With this command you'll only update packages from eZ (and Symfony) that
+have received updates:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist ezsystems/ezpublish-kernel ezsystems/demobundle ezsystems/ezdemo-ls-extension ezsystems/ezpublish-legacy symfony/symfony
+
+Icon
+
+Note: Add "ezsystems/ezfind-ls" to the parameters to get latest version
+if you also use this extension.
+
+| 
+
+Package updates
+---------------
+
+Here are the packages that have received an update as part of this
+releases:
+
+package
+
+version
+
+prior version
+
+ezsystems/ezpublish-kernel
+
+5.4.1
+
+5.4.0
+
+ezsystems/ezpublish-legacy
+
+5.4.1
+
+5.4.0
+
+ezsystems/demobundle
+
+5.4.1
+
+5.4.0
+
+ezsystems/ezfind
+
+5.4.1
+
+5.4.0
+
+ezsystems/ezdemo-ls-extension
+
+5.4.1
+
+5.4.0
+
+symfony/symfony
+
+2.6.1
+
+2.5.6
+
+ 
+
+Updates and fixes in this release
+---------------------------------
+
+Key
+
+Summary
+
+T
+
+Created
+
+Updated
+
+Due
+
+Assignee
+
+Reporter
+
+P
+
+Status
+
+Resolution
+
+`EZP-23489 <https://jira.ez.no/browse/EZP-23489>`__
+
+`Symfony 2.6: Make assets install scripts smarter with
+symlinks <https://jira.ez.no/browse/EZP-23489>`__
+
+|Improvement|
+
+Oct 20, 2014
+
+Dec 18, 2014
+
+Unassigned
+
+André Rømcke
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23727 <https://jira.ez.no/browse/EZP-23727>`__
+
+`Compress packages on updates.ez.no for faster
+downloads <https://jira.ez.no/browse/EZP-23727>`__
+
+|Improvement|
+
+Dec 03, 2014
+
+Dec 30, 2014
+
+Unassigned
+
+André Rømcke
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23754 <https://jira.ez.no/browse/EZP-23754>`__
+
+`SPI Cache TrashHandler should clear cache after
+trashing/recovering <https://jira.ez.no/browse/EZP-23754>`__
+
+|Improvement|
+
+Dec 04, 2014
+
+Dec 15, 2014
+
+Unassigned
+
+André Rømcke
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-21797 <https://jira.ez.no/browse/EZP-21797>`__
+
+`Multisite settings cause recursive sudo when using legacy slot in sudo
+operation <https://jira.ez.no/browse/EZP-21797>`__
+
+|Bug|
+
+Oct 21, 2013
+
+Dec 17, 2014
+
+Unassigned
+
+Benjamin Choquet
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23478 <https://jira.ez.no/browse/EZP-23478>`__
+
+`ezinfo/about redirected after each form
+post <https://jira.ez.no/browse/EZP-23478>`__
+
+|Bug|
+
+Oct 16, 2014
+
+Dec 05, 2014
+
+Unassigned
+
+Pedro Resende
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23483 <https://jira.ez.no/browse/EZP-23483>`__
+
+`Language Switcher does not work properly when using PathPrefix in pure
+legacy <https://jira.ez.no/browse/EZP-23483>`__
+
+|Bug|
+
+Oct 16, 2014
+
+Jan 09, 2015
+
+Unassigned
+
+Joao Inacio
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23612 <https://jira.ez.no/browse/EZP-23612>`__
+
+`[Demo] Add breadcrumb items
+spacing <https://jira.ez.no/browse/EZP-23612>`__
+
+|Bug|
+
+Nov 10, 2014
+
+Dec 30, 2014
+
+Unassigned
+
+Roland Benedetti
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23620 <https://jira.ez.no/browse/EZP-23620>`__
+
+`Segmentation fault error when copying
+subtree <https://jira.ez.no/browse/EZP-23620>`__
+
+|Bug|
+
+Nov 11, 2014
+
+Jan 07, 2015
+
+Unassigned
+
+Ricardo Correia
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23624 <https://jira.ez.no/browse/EZP-23624>`__
+
+`Unable to change base translation when editing
+content <https://jira.ez.no/browse/EZP-23624>`__
+
+|Bug|
+
+Nov 11, 2014
+
+Dec 04, 2014
+
+Unassigned
+
+Eduardo Fernandes
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23639 <https://jira.ez.no/browse/EZP-23639>`__
+
+`dfscleanup.php -B -D not clearing DB-unregistered files on dfs
+share <https://jira.ez.no/browse/EZP-23639>`__
+
+|Bug|
+
+Nov 13, 2014
+
+Jan 06, 2015
+
+Unassigned
+
+Rui Silva
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23643 <https://jira.ez.no/browse/EZP-23643>`__
+
+`Search with permissions off results in
+UnauthorizedException <https://jira.ez.no/browse/EZP-23643>`__
+
+|Bug|
+
+Nov 15, 2014
+
+Nov 27, 2014
+
+Unassigned
+
+André Rømcke
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23672 <https://jira.ez.no/browse/EZP-23672>`__
+
+`content versionview displays wrong modifier name in object
+information <https://jira.ez.no/browse/EZP-23672>`__
+
+|Bug|
+
+Nov 20, 2014
+
+Nov 25, 2014
+
+Unassigned
+
+Joao Inacio
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23676 <https://jira.ez.no/browse/EZP-23676>`__
+
+`Configuration Converter generates invalid URI matching
+configuration <https://jira.ez.no/browse/EZP-23676>`__
+
+|Bug|
+
+Nov 21, 2014
+
+Nov 24, 2014
+
+Unassigned
+
+Jani Tarvainen
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23681 <https://jira.ez.no/browse/EZP-23681>`__
+
+`eZ Find: moving a node does not re-index its children with delayed
+indexing <https://jira.ez.no/browse/EZP-23681>`__
+
+|Bug|
+
+Nov 21, 2014
+
+Jan 23, 2015
+
+Unassigned
+
+Nuno Oliveira
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23683 <https://jira.ez.no/browse/EZP-23683>`__
+
+`Symfony starts always a session on
+legacy\_mode <https://jira.ez.no/browse/EZP-23683>`__
+
+|Bug|
+
+Nov 24, 2014
+
+Nov 25, 2014
+
+Unassigned
+
+Ricardo Correia
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23687 <https://jira.ez.no/browse/EZP-23687>`__
+
+`Notice when running "$phpbin runcronjobs.php
+monitor" <https://jira.ez.no/browse/EZP-23687>`__
+
+|Bug|
+
+Nov 24, 2014
+
+Jan 07, 2015
+
+Unassigned
+
+Paulo Nunes
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23690 <https://jira.ez.no/browse/EZP-23690>`__
+
+`HttpCache: LocalPurgeClient uses deprecated
+X-Group-Location-Id <https://jira.ez.no/browse/EZP-23690>`__
+
+|Bug|
+
+Nov 26, 2014
+
+Dec 29, 2014
+
+Unassigned
+
+Jérôme Vieilledent
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23701 <https://jira.ez.no/browse/EZP-23701>`__
+
+`table cell valign property in XmlText is not properly
+rendered <https://jira.ez.no/browse/EZP-23701>`__
+
+|Bug|
+
+Nov 28, 2014
+
+Jan 06, 2015
+
+Unassigned
+
+Ricardo Correia
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23703 <https://jira.ez.no/browse/EZP-23703>`__
+
+`Impossible to update only the name of a
+section <https://jira.ez.no/browse/EZP-23703>`__
+
+|Bug|
+
+Nov 28, 2014
+
+Jan 06, 2015
+
+Unassigned
+
+Damien Pobel
+
+|Critical|
+
+Closed
+
+Fixed
+
+`EZP-23739 <https://jira.ez.no/browse/EZP-23739>`__
+
+`Files uploaded with multiupload will be download with the wrong
+Content-Type <https://jira.ez.no/browse/EZP-23739>`__
+
+|Bug|
+
+Dec 03, 2014
+
+Dec 12, 2014
+
+Unassigned
+
+Eduardo Fernandes
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23752 <https://jira.ez.no/browse/EZP-23752>`__
+
+`Strict standards error with Symfony
+2.6 <https://jira.ez.no/browse/EZP-23752>`__
+
+|Bug|
+
+Dec 04, 2014
+
+Jan 30, 2015
+
+Unassigned
+
+Jérôme Vieilledent
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23753 <https://jira.ez.no/browse/EZP-23753>`__
+
+`Incorrect node UrlAlias for (partially) untranslated
+objects <https://jira.ez.no/browse/EZP-23753>`__
+
+|Bug|
+
+Dec 04, 2014
+
+Jan 09, 2015
+
+Unassigned
+
+Joao Inacio
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23812 <https://jira.ez.no/browse/EZP-23812>`__
+
+`vertical align in table cells is not visible in the
+editor <https://jira.ez.no/browse/EZP-23812>`__
+
+|Bug|
+
+Dec 18, 2014
+
+Jan 06, 2015
+
+Unassigned
+
+Damien Pobel
+
+|High|
+
+Closed
+
+Fixed
+
+`23
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=project%3DEZP+AND+fixVersion+in+%28+%225.4.1%22+%29+AND+type+in+%28+Bug%2C+Story%2C+Improvement%29+ORDER+BY+issuetype+DESC%2C+key+ASC++>`__
+
+Attachments:
+------------
+
+| |image27|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/26673271/26902545.jpg>`__
+(image/jpeg)
+
+Comments:
+---------
+
++--------------------------------------------------------------------------+
+| If you are using eZFind you should update it as well:                    |
+|                                                                          |
+| ::                                                                       |
+|                                                                          |
+|     php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist e |
+| zsystems/ezfind-ls                                                       |
+|                                                                          |
+|                                                                          |
+|                                                                          |
+| |image30| Posted by msanchez at Mar 02, 2015 22:39                       |
++--------------------------------------------------------------------------+
+| It is specified in the info block below the composer update              |
+| line, \ `Mauricio Sánchez <https://doc.ez.no/display/~maurosanchezd>`__: |
+|                                                                          |
+| *Note: Add "ezsystems/ezfind-ls" to the parameters to get latest version |
+| if you also use this extension.*                                         |
+| Do you think it should be made more visible ?                            |
+| |image31| Posted by bertrand.dunogier@ez.no at Mar 03, 2015 13:20        |
++--------------------------------------------------------------------------+
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-23489
+.. |High| image:: https://jira.ez.no/images/icons/priorities/major.png
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-23727
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-23754
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-21797
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23478
+.. |Medium| image:: https://jira.ez.no/images/icons/priorities/minor.png
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23483
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23612
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23620
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23624
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23639
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23643
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23672
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23676
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23681
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23683
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23687
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23690
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23701
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23703
+.. |Critical| image:: https://jira.ez.no/images/icons/priorities/critical.png
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23739
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23752
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23753
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23812
+.. |image27| image:: images/icons/bullet_blue.gif
+.. |image28| image:: images/icons/contenttypes/comment_16.png
+.. |image29| image:: images/icons/contenttypes/comment_16.png
+.. |image30| image:: images/icons/contenttypes/comment_16.png
+.. |image31| image:: images/icons/contenttypes/comment_16.png

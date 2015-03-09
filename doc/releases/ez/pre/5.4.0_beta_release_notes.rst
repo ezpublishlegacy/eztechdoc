@@ -1,0 +1,280 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+#. `Pre Releases <Pre-Releases_16286284.html>`__
+
+eZ Publish Platform 5.x : 5.4.0-BETA Release Notes
+==================================================
+
+Created and last modified by andre.romcke@ez.no on Nov 27, 2014
+
+Discover eZ Publish Platform 5.4 "Castor"
+-----------------------------------------
+
+7th November 2014
+'''''''''''''''''
+
++--------------------------------------------------------------------------+
+| |image1|                                                                 |
++--------------------------------------------------------------------------+
+| eZ Publish Platform 5.4 is our last 5.x release before we launch eZ      |
+| Platform (aka 6.0) next year, based on the Platform parts that have been |
+| introduced and matured during the 5.x releases starting with 5.0 two     |
+| years ago.                                                               |
+|                                                                          |
+| 5.4 is a sibling release to 5.3, meaning it will be supported as a LTS   |
+| (`Long term supported <http://support.ez.no/Public/Service-Life>`__)     |
+| together with it. Where 5.3 provides already very high stability, 5.4    |
+| provides further forward compatibility with  `eZ                         |
+| Platform <http://ez.no/About-eZ/Blog/Introducing-eZ-Platform-And-Its-New |
+| -Development-Cycle>`__,                                                  |
+| and in addition to shipping with new "eZ Platform" features as showcased |
+| below, 5.4 will thus receive some additional improvements during first   |
+| part of 2015 when necessary to make sure upgrading from 5.4 to eZ        |
+| Platform will be as smooth as possible.                                  |
+|                                                                          |
+| Practical information for beta testers                                   |
+|                                                                          |
+| Icon                                                                     |
+| *Rolling update:* This beta is a rolling update, there are beta / RC     |
+| updates via composer until final release is out, where you should        |
+| re-install with the final.                                               |
+|                                                                          |
+| *Download:* This release is available in TTL license for eZ Partners in  |
+| `Partner Portal <http://ez.no/Partner-Portal>`__, alternatively the open |
+| source parts of the product comparable to this beta is available as part |
+| of `2014.11 Community                                                    |
+| release <http://share.ez.no/blogs/community-project-board/ez-publish-com |
+| munity-project-2014.11-available-now>`__.                                |
+|                                                                          |
+| *Reporting bugs:* Make sure to mark affected version to be the same      |
+| version you currently have, so if you just downloaded beta1 report it as |
+| 5.4.0-beta1, but if you have done composer update and received RC        |
+| packages, report as 5.4.0-RC1. If on Community release mark affected as  |
+| v2014.11 if that is what you have.                                       |
+|                                                                          |
+| |                                                                        |
+|                                                                          |
+| Quick links                                                              |
+| ^^^^^^^^^^^                                                              |
+|                                                                          |
+| -  `Install <Installation_7438500.html>`__                               |
+| -  `Requirements <Requirements-5.4_25985659.html>`__                     |
+| -  <upgrade guide from 5.3 & 5.2 coming>                                 |
+|                                                                          |
+                                                                          
++--------------------------------------------------------------------------+
+
+5.4 Features
+------------
+
+5.3 introduces several new features which makes it easier to use, faster
+to develop on and also continues to improve performance.
+
+Batteries included: Symfony 2.5, later update to 2.6  & 2.7 LTS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Given the theme of this release compared to 5.3 is to provider access to
+all the latests features and be as close to what you would expect from
+eZ Platform next year, we bundle it with Symfony 2.5 which provide a
+slew of new features and improvements to make your life easier. We
+further plan to bump the Symfony version to Symfony 2.6 in December, and
+lastly update to 2.7LTS in beginning of summer 2015. Symfony 2.7LTS is
+the Symfony version 5.4 will be supported with for the rest of it's long
+term supported life.
+
+New features since Symfony 2.3LTS:
+
+-  `Symfony 2.4 <http://symfony.com/blog/symfony-2-4-0-released>`__
+-  `Symfony
+   2.5 <http://symfony.com/blog/symfony-2-5-0-beta-1-released>`__
+-  December 2014 update: `Symfony
+   2.6 <http://symfony.com/blog/symfony-2-6-0-beta1-released>`__
+-  Summer 2015 update: Symfony 2.7 LTS
+
+Binary files / IO improvements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Native IO support, using Flysystem as a default handler
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Handling of binary files input/output is now native. The default
+configuration
+uses \ `thephpleague/flysystem <https://github.com/thephpleague/flysystem>`__,
+an abstract Flysystem library. This will allow eZ Platform to support
+all kind of solutions for binary storage in the future.
+
+-  Pull-request: \ `ezsystems/ezpublish-kernel#1017 <https://github.com/ezsystems/ezpublish-kernel/pull/1017>`__
+-  JIRA issue: 
+   `|image2|\ EZP-23328 <https://jira.ez.no/browse/EZP-23328>`__ - Split
+   the IO handler interface Closed
+-  Documentation: \ `https://doc.ez.no/display/EZP6/Binary+files+handling <https://doc.ez.no/display/EZP6/Binary+files+handling>`__
+
+Native support for legacy DFS cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Building on top of the Native IO system, a legacy metadata handler has
+been added, compatible with the legacy database, the official solution
+for multi-server eZ Publish 4.x and 5.x. This avoids the overhead of
+legacy fallbacks for binary file lookups in 5.4.
+
+-  Pull-request: \ `ezsystems/ezpublish-kernel#1031 <https://github.com/ezsystems/ezpublish-kernel/pull/1031>`__
+-  JIRA issue: 
+   `|image3|\ EZP-23437 <https://jira.ez.no/browse/EZP-23437>`__ -
+   Finish the native DFS IO metadata handler Closed
+-  Documentation: \ `https://doc.ez.no/display/EZP6/Legacy+DFS+cluster <https://doc.ez.no/display/EZP6/Legacy+DFS+cluster>`__
+
+URL decorators
+^^^^^^^^^^^^^^
+
+The revamp of the IO architecture brings much flexibility in how URL of
+images and binary files are handled. It is now very easy to serve images
+from a static server by means of semantic configuration.
+
+-  Pull-request: \ `ezsystems/ezpublish-kernel#1039 <https://github.com/ezsystems/ezpublish-kernel/pull/1039>`__
+-  JIRA issue: 
+   `|image4|\ EZP-23441 <https://jira.ez.no/browse/EZP-23441>`__ - IO
+   Url decorator configuration Closed
+-  Documentation: \ `https://doc.ez.no/display/EZP6/Binary+files+URL+handling <https://doc.ez.no/display/EZP6/Binary+files+URL+handling>`__
+
+New ImageAlias system using Imagine
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Image alias system can be considered as one of the oldest features in eZ
+Publish. It is a very flexible mechanism for managing content images and
+has long proven its efficiency. For 5.4 we have migrated the feature to
+nbeing Symfony based using LiipImagineBundle and Imagine library. This
+allows for new functionality in terms of extensibility for develipng
+your own filters and built in support for image handling
+via \ **GD** (default), **ImageMagick** (through `Imagick PHP
+extension <http://php.net/imagick>`__)
+and \ **GraphicsMagick** (through `Gmagick PHP
+extension <http://php.net/gmagick>`__).
+
+-  Blog post: \ `New in eZ 5.4: Image alias system
+   revamped <http://share.ez.no/blogs/core-development-team/new-in-ez-5.4-image-alias-system-revamped>`__
+
+Improved HTTPCache system using FOSHTTPCache
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Being built on top of Symfony, a HTTP framework, Varnish support in eZ
+Publish is implicit. In 5.2 we introduced \ `context-aware Http
+cache <https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/cache/context_aware_http_cache.md>`__,
+allowing cache to be shared even for authenticated users. Version 5.4
+goes one step further, adding native support for Varnish 4, and more.
+
+-  Blog post: \ `New in eZ 5.4: HTTP cache
+   reloaded <http://share.ez.no/blogs/core-development-team/new-in-ez-5.4-http-cache-reloaded>`__
+
+SiteAccess aware "dynamic settings injection"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For those that have already started to create services in Symfony with
+eZ Publish Platform and encountered having to read SiteAccess settings,
+you have up until this point had to depend on a service called
+ConfigResolver which would allow you to lookup settings depending on the
+currently SiteAccess. However as of 5.4 this is no longer necessary,
+with a new syntax your able to specify the settings you want in normal
+service configuration and get the resulting scalar value directly in
+your service.
+
+-  Blog post: `New in eZ 5.4: Dynamic settings
+   injection <http://share.ez.no/blogs/core-development-team/new-in-ez-5.4-dynamic-settings-injection>`__
+
+Improved Search API Performance
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+eZ Publish Platform 5.4 and 5.3.3 included noticeable (significant when
+using several languages) performance improvements when using the
+Platform Search API.
+
+-  Blog
+   post: \ `http://share.ez.no/blogs/core-development-team/new-in-5.3.3-and-5.4-improved-api-performance <http://share.ez.no/blogs/core-development-team/new-in-5.3.3-and-5.4-improved-api-performance>`__
+
+Other Improvements
+~~~~~~~~~~~~~~~~~~
+
+-  `ez\_field\_name <ez_field_name_25985262.html>`__,
+   `ez\_field\_description <ez_field_description_25985266.html>`__ and
+   `ez\_trans\_prop <ez_trans_prop_25985275.html>`__ Twig helpers
+-  `eZ Matrix FieldType <FieldTypes-reference_10158198.html>`__ added as
+   a optional community bundle
+-  `eZ Price FieldType <FieldTypes-reference_10158198.html>`__ added as
+   a optional community bundle
+-  `|image5|\ EZP-22523 <https://jira.ez.no/browse/EZP-22523>`__ -
+   Support locking with Memcached SessionHandler Closed
+-  eZ Find now using Solr 4.10.1
+-  Demo Bundle:
+
+   -  Search page using Repository API
+   -  Breadcrumbs now using whiteoctober/breadcrumbs-bundle
+   -  Menu now using knplabs/knp-menu-bundle
+
+5.4 Contributors
+----------------
+
+For 5.3 we want to reach out a special thank you to those that have
+contributed to this release, especially the brave who have helped out on
+the "`eZ
+Platform <https://github.com/ezsystems/ezpublish-kernel/graphs/contributors?from=2014-05-15&to=2014-11-15&type=c>`__
+`stack <https://github.com/ezsystems/ezpublish-community/graphs/contributors?from=2014-05-15&to=2014-11-15&type=c>`__".
+
+-  `crevillo <https://github.com/crevillo>`__ ( "Winner of the 5.4
+   contributor award" |(smile)| )
+-  `emodric <https://github.com/emodric>`__
+-  `blankse <https://github.com/blankse>`__
+-  `pborreli <https://github.com/pborreli>`__
+-  `flovntp <https://github.com/flovntp>`__
+-  `wizhippo <https://github.com/wizhippo>`__
+-  `daoudi <https://github.com/sdaoudi>`__
+-  `dfritschy <https://github.com/dfritschy>`__
+-  `bchoquet-heliopsis <https://github.com/bchoquet-heliopsis>`__
+-  `iherak <https://github.com/iherak>`__
+-  `jeromegamez <https://github.com/jeromegamez>`__
+-  `lsmith77 <https://github.com/lsmith77>`__
+-  `juanolon <https://github.com/juanolon>`__
+-  `piribes <https://github.com/piribes>`__
+
+In addition, ezpublish-legacy is still receiving a lot of pull requests.
+The equally brave contributors to this part of the release can be found
+`here <https://github.com/ezsystems/ezpublish-legacy/graphs/contributors?from=2014-04-04&to=2014-11-15&type=c>`__.
+
+5.4.0 Full Changelog
+--------------------
+
+For the full 5.3 changelog please refer to the `5.4.0
+Changelog <5.4.0-Changelog_25985428.html>`__ dedicated page.
+
+5.4 Known issues
+----------------
+
+The complete list of know issues is available in the `5.4 Known
+issues <Known-issues-in-5.4_25985611.html>`__ page.
+
+ 
+
+Attachments:
+------------
+
+| |image7| `iStock\_000032478246XLarge - banner
+doc.jpg <attachments/26673173/26902529.jpg>`__ (image/jpeg)
+|  |image8| `Ventoux-Square.jpg <attachments/26673173/26902530.jpg>`__
+(image/jpeg)
+|  |image9|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/26673173/26902531.jpg>`__
+(image/jpeg)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: attachments/26673173/26902529.jpg
+.. |image1| image:: attachments/26673173/26902529.jpg
+.. |image2| image:: https://jira.ez.no/images/icons/issuetypes/story.png
+.. |image3| image:: https://jira.ez.no/images/icons/issuetypes/story.png
+.. |image4| image:: https://jira.ez.no/images/icons/issuetypes/story.png
+.. |image5| image:: https://jira.ez.no/images/icons/issuetypes/story.png
+.. |(smile)| image:: images/icons/emoticons/smile.png
+.. |image7| image:: images/icons/bullet_blue.gif
+.. |image8| image:: images/icons/bullet_blue.gif
+.. |image9| image:: images/icons/bullet_blue.gif

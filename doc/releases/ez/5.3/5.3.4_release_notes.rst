@@ -1,0 +1,634 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+#. `5.3 Release Notes <5.3-Release-Notes_23527462.html>`__
+
+eZ Publish Platform 5.x : 5.3.4 Release Notes
+=============================================
+
+Created and last modified by andre.romcke@ez.no on Jan 06, 2015
+
+January 5th 2015
+                
+
+eZ announces the availability of 5.3.4, a maintenance release available
+for all users of eZ Publish Platform 5.3 containing a notable few
+`updates and fixes <5.3.4-Release-Notes_25985326.html>`__.
+
+ 
+
+**
+
+-  `Updating from a previous version of eZ Publish Platform
+   5.3 <#id-5.3.4ReleaseNotes-UpdatingfromapreviousversionofeZPublishPlatform5.3>`__
+
+   -  `1. Patch your composer.json
+      file <#id-5.3.4ReleaseNotes-1.Patchyourcomposer.jsonfile>`__
+   -  `2. Updating Composer Packages
+      selectively <#id-5.3.4ReleaseNotes-2.UpdatingComposerPackagesselectively>`__
+   -  `3. [Optionally; for RHEL/CentOS] Update your cluster
+      setup <#id-5.3.4ReleaseNotes-memcached3.[Optionally;forRHEL/CentOS]Updateyourclustersetup>`__
+
+-  `Package updates <#id-5.3.4ReleaseNotes-packagesPackageupdates>`__
+-  `Updates and fixes in this
+   release <#id-5.3.4ReleaseNotes-updatesUpdatesandfixesinthisrelease>`__
+
+| 
+
+Updating from a previous version of eZ Publish Platform 5.3
+-----------------------------------------------------------
+
+Icon
+
+Update to \ `5.3.3 <5.3.3-Release-Notes_23528625.html>`__ first before
+you continue with instructions below.
+
+| These instructions take advantage of the new
+`Composer <https://getcomposer.org/>`__ powered update systems in 5.3
+for maintenance updates, so make sure you familiarize yourself with the
+`Using Composer <Using-Composer_23527865.html>`__ page.
+| For Upgrading from versions prior to 5.3 look at our `Upgrading from
+5.1 to 5.3 <Upgrading-from-5.1-to-5.3_21299688.html>`__ or `Upgrading
+from 5.2 to 5.3 <Upgrading-from-5.2-to-5.3_19891003.html>`__ page.
+
+1. Patch your composer.json file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For issue  `|image0|\ EZP-23492 <https://jira.ez.no/browse/EZP-23492>`__
+- Improve use of assetic dump with composer Closed  composer.json should
+be edited in similar manner as below to take full advantage of the
+change.
+
+**/composer.json diff**
+
+.. code:: theme:
+
+    diff --git a/composer.json b/composer.json
+    index ffe18af..ffe22b8 100644
+    --- a/composer.json
+    +++ b/composer.json
+    @@ -72,7 +72,7 @@
+                 "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+                 "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+                 "eZ\\Bundle\\EzPublishLegacyBundle\\Composer\\ScriptHandler::installAssets",
+    -            "eZ\\Bundle\\EzPublishCoreBundle\\Composer\\ScriptHandler::dumpAssets",
+    +            "eZ\\Bundle\\EzPublishCoreBundle\\Composer\\ScriptHandler::dumpAssetsHelpText",
+                 "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+                 "eZ\\Bundle\\EzPublishLegacyBundle\\Composer\\ScriptHandler::installLegacyBundlesExtensions"
+             ]
+    @@ -85,7 +85,9 @@
+             "symfony-app-dir": "ezpublish",
+             "symfony-web-dir": "web",
+             "ezpublish-legacy-dir": "ezpublish_legacy",
+    -        "_symfony-assets-install_comment_": "One of 'symlink', 'relative' (symlinks) or 'hard'",
+    +        "___ezpublish-asset-dump-env": "To set environment used by dumpAssets script, like 'prod', or 'none' to skip",
+    +        "ezpublish-asset-dump-env": "",
+    +        "___symfony-assets-install": "One of 'symlink', 'relative' (symlinks) or 'hard'",
+             "symfony-assets-install": "relative",
+             "incenteev-parameters": {
+                 "file": "ezpublish/config/parameters.yml"
+
+2. Updating Composer Packages selectively
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With this command you'll only update packages from eZ (and Symfony) that
+have received updates since 5.3.0:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist ezsystems/ezpublish-kernel ezsystems/demobundle ezsystems/ezpublish-legacy symfony/symfony
+
+Icon
+
+Note: Add "ezsystems/ezfind-ls" to the parameters to get latest version
+if you also use this extension.
+
+3. [Optionally; for RHEL/CentOS] Update your cluster setup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Icon
+
+Note: We are committed to continue supporting php-memcache for use with
+RHEL/CentOS 6.x on eZ Publish 5.3.x for some more sub releases, but
+highly recommend you start to plan migration to php-memcached as it
+solves several issues identified with php-memcache; *no locking for
+sessions, limited support for `persistence (Stash) cache
+settings <Persistence-cache-configuration_12781293.html>`__ & limited
+support for memcached capabilities compared to php-memcached which is
+built on top of libmemcached.*
+
+As part of 
+`|image1|\ EZP-22523 <https://jira.ez.no/browse/EZP-22523>`__ - Support
+locking with Memcached SessionHandler Closed  the recommendation for how
+to setup memcached for session use has been changed, this affects
+RHEL/CentOS installations which previously where documented to use
+php-memcache (default on RHEL/CentOS) instead of php-memcached. We now
+recommend using either php-memcached or PDO if you need database
+persistence, see the updated `Clustering
+page <Clustering_25985700.html>`__ as well as the updated `Session
+page <Session_8323282.html>`__ for more info.
+
+For how to migrate to php-memcached:
+
+**RHEL/CentOS 6.x php-memcache -> php-memcached**
+
+.. code:: theme:
+
+    # Remove php-memcache if you already have it installed
+    yum remove php-pecl-memcache.x86_64
+    # Install php-memcached from EPEL, adjust for 6.x version (doc for 5.4 with RHEL/CentOS 7.x describes using PECL, but that does not work with 6.x)
+    rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+    yum install php-pecl-memcached -y
+    # Verify that you have "memcached" and not "memcache"
+    $ php -m | grep 'memcache'
+
+Package updates
+---------------
+
+Here are the packages that have received an update as part of this
+releases:
+
+package
+
+version
+
+prior version
+
+ezsystems/ezpublish-kernel
+
+5.3.4
+
+5.3.3
+
+ezsystems/ezpublish-legacy
+
+5.3.4
+
+5.3.3
+
+ezsystems/ezfind-ls
+
+5.3.4
+
+5.3.3
+
+Other packages that have received update since 5.3.0:
+
+package
+
+version
+
+ezsystems/comments-bundle
+
+5.3.2
+
+ezsystems/demobundle
+
+5.3.2
+
+ezsystems/ngsymfonytools-bundle
+
+1.0.5
+
+ezsystems/ezflow-ls-extension
+
+5.3.3.1
+
+ezsystems/ezsurvey-ls
+
+5.3.3
+
+ezsystems/ezcontentstaging-ls
+
+5.3.3
+
+symfony/symfony
+
+`>=2.3.19 <http://symfony.com/blog/category/releases>`__
+
+ 
+
+Updates and fixes in this release
+---------------------------------
+
+Key
+
+Summary
+
+Component/s
+
+`EZP-22523 <https://jira.ez.no/browse/EZP-22523>`__
+
+`Support locking with Memcached
+SessionHandler <https://jira.ez.no/browse/EZP-22523>`__
+
+Documentation, Symfony stack
+
+`EZP-22988 <https://jira.ez.no/browse/EZP-22988>`__
+
+`More dev friendly info on
+UnauthorizedException <https://jira.ez.no/browse/EZP-22988>`__
+
+Repository & Services (Public API impl)
+
+`EZP-23351 <https://jira.ez.no/browse/EZP-23351>`__
+
+`Honor relative flag on legacy:assets\_install for legacy
+wrappers <https://jira.ez.no/browse/EZP-23351>`__
+
+Clustering
+
+`EZP-23459 <https://jira.ez.no/browse/EZP-23459>`__
+
+`eZContentObjectTreeNodeOperations::move missing
+features <https://jira.ez.no/browse/EZP-23459>`__
+
+Caching
+
+`EZP-23462 <https://jira.ez.no/browse/EZP-23462>`__
+
+`Cache Object state Persistence class with
+Stash <https://jira.ez.no/browse/EZP-23462>`__
+
+Caching
+
+`EZP-23492 <https://jira.ez.no/browse/EZP-23492>`__
+
+`Improve use of assetic dump with
+composer <https://jira.ez.no/browse/EZP-23492>`__
+
+Composer
+
+`EZP-23727 <https://jira.ez.no/browse/EZP-23727>`__
+
+`Compress packages on updates.ez.no for faster
+downloads <https://jira.ez.no/browse/EZP-23727>`__
+
+updates.ez.no
+
+`EZP-21781 <https://jira.ez.no/browse/EZP-21781>`__
+
+`ezfSolrDocumentFieldBaseTest::testGetFieldName() throws an error
+because of updated table
+structure <https://jira.ez.no/browse/EZP-21781>`__
+
+Extensions/eZ Find, Test framework
+
+`EZP-21797 <https://jira.ez.no/browse/EZP-21797>`__
+
+`Multisite settings cause recursive sudo when using legacy slot in sudo
+operation <https://jira.ez.no/browse/EZP-21797>`__
+
+Repository & Services (Public API impl), SPI interfaces
+
+`EZP-22408 <https://jira.ez.no/browse/EZP-22408>`__
+
+`Deleting a content does not remove references to this content in
+relation(list) fields <https://jira.ez.no/browse/EZP-22408>`__
+
+Legacy Storage engine, Repository & Services (Public API impl), Symfony
+stack
+
+`EZP-22982 <https://jira.ez.no/browse/EZP-22982>`__
+
+`/content/treemenu throws PHP notices with
+nginx <https://jira.ez.no/browse/EZP-22982>`__
+
+Administration Interface
+
+`EZP-23003 <https://jira.ez.no/browse/EZP-23003>`__
+
+`User is logged out after first (multi)upload with
+ezfind <https://jira.ez.no/browse/EZP-23003>`__
+
+Extensions/eZ Find, Extensions/eZ MultiUpload
+
+`EZP-23027 <https://jira.ez.no/browse/EZP-23027>`__
+
+`Session files not being removed/cleaned
+up <https://jira.ez.no/browse/EZP-23027>`__
+
+Documentation, Symfony stack
+
+`EZP-23287 <https://jira.ez.no/browse/EZP-23287>`__
+
+`empty Image FieldType triggers
+twig\_error\_runtime <https://jira.ez.no/browse/EZP-23287>`__
+
+Symfony stack
+
+`EZP-23349 <https://jira.ez.no/browse/EZP-23349>`__
+
+`Property "id" on Image\\Value is filled with wrong
+value <https://jira.ez.no/browse/EZP-23349>`__
+
+Field types
+
+`EZP-23389 <https://jira.ez.no/browse/EZP-23389>`__
+
+`ezcMailComposer bug when sending e-mails with long name and Norwegian
+characters <https://jira.ez.no/browse/EZP-23389>`__
+
+Misc
+
+`EZP-23412 <https://jira.ez.no/browse/EZP-23412>`__
+
+`Setting the section seems to avoid the delayed indexing
+procedure <https://jira.ez.no/browse/EZP-23412>`__
+
+Administration Interface, Extensions/eZ Find
+
+`EZP-23424 <https://jira.ez.no/browse/EZP-23424>`__
+
+`Public API loadContentByRemoteId returns wrong content due to stale
+cache <https://jira.ez.no/browse/EZP-23424>`__
+
+Administration Interface, Caching, Legacy Storage engine, Public API
+interfaces
+
+`EZP-23425 <https://jira.ez.no/browse/EZP-23425>`__
+
+`Pasting at the end of paragraph in Chrome put the text at the
+beginning <https://jira.ez.no/browse/EZP-23425>`__
+
+Extensions/eZ Online Editor
+
+`EZP-23447 <https://jira.ez.no/browse/EZP-23447>`__
+
+`ServiceNotFoundException: ezpublish.fieldtype.ezbinaryfile.ioservice
+after update. <https://jira.ez.no/browse/EZP-23447>`__
+
+Documentation, Field types, Symfony stack
+
+`EZP-23463 <https://jira.ez.no/browse/EZP-23463>`__
+
+`bin/scripts/rhel/solr restart & stop does not
+work <https://jira.ez.no/browse/EZP-23463>`__
+
+Extensions/eZ Find
+
+`EZP-23474 <https://jira.ez.no/browse/EZP-23474>`__
+
+`LegacyEmbedScriptCommand doesn't activate the
+LegacyBundles <https://jira.ez.no/browse/EZP-23474>`__
+
+`EZP-23478 <https://jira.ez.no/browse/EZP-23478>`__
+
+`ezinfo/about redirected after each form
+post <https://jira.ez.no/browse/EZP-23478>`__
+
+Misc
+
+`EZP-23480 <https://jira.ez.no/browse/EZP-23480>`__
+
+`Error in json response when uploading
+file <https://jira.ez.no/browse/EZP-23480>`__
+
+Administration Interface
+
+`EZP-23483 <https://jira.ez.no/browse/EZP-23483>`__
+
+`Language Switcher does not work properly when using PathPrefix in pure
+legacy <https://jira.ez.no/browse/EZP-23483>`__
+
+`EZP-23486 <https://jira.ez.no/browse/EZP-23486>`__
+
+`Preview always falls back to
+Legacy <https://jira.ez.no/browse/EZP-23486>`__
+
+Symfony stack
+
+`EZP-23491 <https://jira.ez.no/browse/EZP-23491>`__
+
+`eZCache: clear-tag won't work with multiple
+tags <https://jira.ez.no/browse/EZP-23491>`__
+
+Caching, Documentation
+
+`EZP-23497 <https://jira.ez.no/browse/EZP-23497>`__
+
+`Workflow Event / Multiplexer: can not remove user groups from "Users
+without workflow IDs" <https://jira.ez.no/browse/EZP-23497>`__
+
+Workflows
+
+`EZP-23499 <https://jira.ez.no/browse/EZP-23499>`__
+
+`Fatal error if you try to remove class with a nonexistent
+datatype <https://jira.ez.no/browse/EZP-23499>`__
+
+Administration Interface
+
+`EZP-23505 <https://jira.ez.no/browse/EZP-23505>`__
+
+`Router generates wrong URL without
+vhost <https://jira.ez.no/browse/EZP-23505>`__
+
+`EZP-23511 <https://jira.ez.no/browse/EZP-23511>`__
+
+`EZ Si Vhost issues on Apache
+2.4 <https://jira.ez.no/browse/EZP-23511>`__
+
+Documentation, Legacy extensions
+
+`EZP-23516 <https://jira.ez.no/browse/EZP-23516>`__
+
+`Language switcher and legacy
+module <https://jira.ez.no/browse/EZP-23516>`__
+
+Language
+
+`EZP-23517 <https://jira.ez.no/browse/EZP-23517>`__
+
+`Excluded uri prefixes result in redirect
+loop <https://jira.ez.no/browse/EZP-23517>`__
+
+Symfony stack
+
+`EZP-23527 <https://jira.ez.no/browse/EZP-23527>`__
+
+`ezdatetime with no default value causes class edit to
+fail <https://jira.ez.no/browse/EZP-23527>`__
+
+Field types, Legacy IO
+
+`EZP-23528 <https://jira.ez.no/browse/EZP-23528>`__
+
+`eZContentObjectTreeNode::createAttributeFilterSQLStrings() returns
+invalid 'in'/'not in' SQL
+statements <https://jira.ez.no/browse/EZP-23528>`__
+
+Database related
+
+`EZP-23529 <https://jira.ez.no/browse/EZP-23529>`__
+
+`Storing a draft with a bad object relation link should not create an
+entry in ezcontentobject\_link <https://jira.ez.no/browse/EZP-23529>`__
+
+Extensions/eZ Online Editor
+
+`EZP-23532 <https://jira.ez.no/browse/EZP-23532>`__
+
+`Languages lost from content when using
+packages <https://jira.ez.no/browse/EZP-23532>`__
+
+Packages
+
+`EZP-23552 <https://jira.ez.no/browse/EZP-23552>`__
+
+`Symfony cache won't be cleaned if Legacy ViewCaching is
+disabled <https://jira.ez.no/browse/EZP-23552>`__
+
+Caching, Symfony stack
+
+`EZP-23553 <https://jira.ez.no/browse/EZP-23553>`__
+
+`Checking for existence of legacy templates does not
+work <https://jira.ez.no/browse/EZP-23553>`__
+
+Symfony stack, Template language
+
+`EZP-23578 <https://jira.ez.no/browse/EZP-23578>`__
+
+`Fatal error in LocationService copy/move when content/read has
+limitations <https://jira.ez.no/browse/EZP-23578>`__
+
+Permissions, Repository & Services (Public API impl)
+
+`EZP-23579 <https://jira.ez.no/browse/EZP-23579>`__
+
+`As a Sysadmin I want to have official Apache configuration bundled with
+the code <https://jira.ez.no/browse/EZP-23579>`__
+
+Documentation
+
+`EZP-23594 <https://jira.ez.no/browse/EZP-23594>`__
+
+`It's not possible to use custom controllers for embed (inline) views in
+XmlText field type <https://jira.ez.no/browse/EZP-23594>`__
+
+Symfony stack
+
+`EZP-23595 <https://jira.ez.no/browse/EZP-23595>`__
+
+`PDOException in UserService createUser(): Integrity constraint
+violation <https://jira.ez.no/browse/EZP-23595>`__
+
+Repository & Services (Public API impl)
+
+`EZP-23599 <https://jira.ez.no/browse/EZP-23599>`__
+
+`Legacy search location gateway is not correctly quoting depth
+column <https://jira.ez.no/browse/EZP-23599>`__
+
+Legacy Storage engine
+
+`EZP-23603 <https://jira.ez.no/browse/EZP-23603>`__
+
+`eZ Find: "Hidden by superior" nodes not indexed when parent is
+hidden/unhidden in frontend <https://jira.ez.no/browse/EZP-23603>`__
+
+Extensions/eZ Find
+
+`EZP-23604 <https://jira.ez.no/browse/EZP-23604>`__
+
+`Error installing package <https://jira.ez.no/browse/EZP-23604>`__
+
+Administration Interface, Packages
+
+`EZP-23606 <https://jira.ez.no/browse/EZP-23606>`__
+
+`View parameter named "node" overrides $node variable in legacy
+template <https://jira.ez.no/browse/EZP-23606>`__
+
+`EZP-23607 <https://jira.ez.no/browse/EZP-23607>`__
+
+`content versionview displays wrong published version in object
+information <https://jira.ez.no/browse/EZP-23607>`__
+
+Administration Interface
+
+`EZP-23620 <https://jira.ez.no/browse/EZP-23620>`__
+
+`Segmentation fault error when copying
+subtree <https://jira.ez.no/browse/EZP-23620>`__
+
+Legacy IO
+
+`EZP-23643 <https://jira.ez.no/browse/EZP-23643>`__
+
+`Search with permissions off results in
+UnauthorizedException <https://jira.ez.no/browse/EZP-23643>`__
+
+Repository & Services (Public API impl)
+
+`EZP-23651 <https://jira.ez.no/browse/EZP-23651>`__
+
+`EZ Si missing
+/var/[^]+/cache/public <https://jira.ez.no/browse/EZP-23651>`__
+
+Legacy extensions
+
+`EZP-23672 <https://jira.ez.no/browse/EZP-23672>`__
+
+`content versionview displays wrong modifier name in object
+information <https://jira.ez.no/browse/EZP-23672>`__
+
+Administration Interface
+
+`EZP-23676 <https://jira.ez.no/browse/EZP-23676>`__
+
+`Configuration Converter generates invalid URI matching
+configuration <https://jira.ez.no/browse/EZP-23676>`__
+
+Install
+
+`EZP-23681 <https://jira.ez.no/browse/EZP-23681>`__
+
+`eZ Find: moving a node does not re-index its children with delayed
+indexing <https://jira.ez.no/browse/EZP-23681>`__
+
+Extensions/eZ Find
+
+`EZP-23683 <https://jira.ez.no/browse/EZP-23683>`__
+
+`Symfony starts always a session on
+legacy\_mode <https://jira.ez.no/browse/EZP-23683>`__
+
+Legacy IO, Symfony stack
+
+`EZP-23687 <https://jira.ez.no/browse/EZP-23687>`__
+
+`Notice when running "$phpbin runcronjobs.php
+monitor" <https://jira.ez.no/browse/EZP-23687>`__
+
+Cronjobs, Extensions/eZ Network
+
+`EZP-23703 <https://jira.ez.no/browse/EZP-23703>`__
+
+`Impossible to update only the name of a
+section <https://jira.ez.no/browse/EZP-23703>`__
+
+PlatformUI, Symfony stack
+
+`57
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=project%3DEZP+AND+fixVersion+in+%28+%225.3.4%22+%29+AND+type+in+%28+Bug%2C+Story%2C+Improvement%29+ORDER+BY+issuetype+DESC%2C+key+ASC+>`__
+
+ 
+
+ 
+
+Attachments:
+------------
+
+| |image2|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/25985326/26378270.jpg>`__
+(image/jpeg)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |image0| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+.. |image1| image:: https://jira.ez.no/images/icons/issuetypes/story.png
+.. |image2| image:: images/icons/bullet_blue.gif

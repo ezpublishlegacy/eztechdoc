@@ -1,0 +1,1183 @@
+#. `eZ Publish Platform 5.x <index.html>`__
+#. `eZ Publish Platform
+   Documentation <eZ-Publish-Platform-Documentation_1114149.html>`__
+#. `Releases <Releases_26674851.html>`__
+#. `eZ Publish 5.x Releases <eZ-Publish-5.x-Releases_12781017.html>`__
+#. `5.4 Release Notes <5.4-Release-Notes_25985407.html>`__
+
+eZ Publish Platform 5.x : 5.4.2 Release Notes
+=============================================
+
+Created and last modified by andre.romcke@ez.no on Feb 24, 2015
+
+February 28th 2015
+                  
+
+eZ announces the availability of 5.4.2, a maintenance release available
+for all users of eZ Publish Platform 5.4 containing a notable few
+`updates and fixes <5.4.2-Release-Notes_26674882.html>`__.
+
+ 
+
+**
+
+-  `Updating from a previous version of eZ Publish Platform
+   5.4 <#id-5.4.2ReleaseNotes-UpdatingfromapreviousversionofeZPublishPlatform5.4>`__
+
+   -  `1. Remove unneeded dependency causing
+      conflicts  <#id-5.4.2ReleaseNotes-1.Removeunneededdependencycausingconflicts>`__
+   -  `2. Updating Composer Packages
+      selectively <#id-5.4.2ReleaseNotes-2.UpdatingComposerPackagesselectively>`__
+
+-  `Package updates <#id-5.4.2ReleaseNotes-packagesPackageupdates>`__
+-  `Updates and fixes in this
+   release <#id-5.4.2ReleaseNotes-updatesUpdatesandfixesinthisrelease>`__
+
+| 
+
+Updating from a previous version of eZ Publish Platform 5.4
+-----------------------------------------------------------
+
+Icon
+
+Update to \ `5.4.1 <5.4.1-Release-Notes_26673271.html>`__ first before
+you continue with instructions below.
+
+| These instructions take advantage
+of \ `Composer <https://getcomposer.org/>`__ for maintenance updates,
+so make sure you familiarize yourself with the `Using
+Composer <Using-Composer_23527865.html>`__ page.
+| For Upgrading from versions prior to 5.4 look at our `Upgrading from
+5.2 to 5.4 <Upgrading-from-5.2-to-5.4_25985649.html>`__, or \ `Upgrading
+from 5.3 to 5.4 <Upgrading-from-5.3-to-5.4_25985666.html>`__ page.
+
+1. Remove unneeded dependency causing conflicts 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Perform the following command to make sure you you are not affected by
+conflicts caused by this package:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar remove behat/mink-selenium-driver --no-update --dev
+
+2. Updating Composer Packages selectively
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+With this command you'll only update packages from eZ (and Symfony) that
+have received updates:
+
+.. code:: theme:
+
+    php -d memory_limit=-1 composer.phar update --no-dev --prefer-dist ezsystems/ezpublish-kernel ezsystems/demobundle ezsystems/ezdemo-ls-extension ezsystems/ezpublish-legacy symfony/symfony
+
+Icon
+
+Note: Add "ezsystems/ezfind-ls" to the parameters to get latest version
+if you also use this extension.
+
+| 
+
+Package updates
+---------------
+
+Here are the packages that have received an update as part of this
+releases:
+
+package
+
+version
+
+prior version
+
+ezsystems/ezpublish-kernel
+
+5.4.1
+
+5.4.0
+
+ezsystems/ezpublish-legacy
+
+5.4.1
+
+5.4.0
+
+ezsystems/demobundle
+
+5.4.1
+
+5.4.0
+
+ezsystems/ezfind
+
+5.4.1
+
+5.4.0
+
+ezsystems/ezdemo-ls-extension
+
+5.4.1
+
+5.4.0
+
+symfony/symfony
+
+2.6.1
+
+2.5.6
+
+ 
+
+Updates and fixes in this release
+---------------------------------
+
+Key
+
+Summary
+
+T
+
+Created
+
+Updated
+
+Due
+
+Assignee
+
+Reporter
+
+P
+
+Status
+
+Resolution
+
+`EZP-23847 <https://jira.ez.no/browse/EZP-23847>`__
+
+`Add Role API parameter to get inherited
+RoleAssignments <https://jira.ez.no/browse/EZP-23847>`__
+
+|Improvement|
+
+Jan 02, 2015
+
+Jan 02, 2015
+
+Unassigned
+
+André Rømcke
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23940 <https://jira.ez.no/browse/EZP-23940>`__
+
+`Decouple search handlers from
+Persistence <https://jira.ez.no/browse/EZP-23940>`__
+
+|Improvement|
+
+Jan 28, 2015
+
+Mar 03, 2015
+
+Paulo Silva
+
+Petar Spanja
+
+|High|
+
+QA
+
+Unresolved
+
+`EZP-23941 <https://jira.ez.no/browse/EZP-23941>`__
+
+`Move field map to storage <https://jira.ez.no/browse/EZP-23941>`__
+
+|Improvement|
+
+Jan 28, 2015
+
+Mar 03, 2015
+
+Rui Silva
+
+Petar Spanja
+
+|High|
+
+QA
+
+Unresolved
+
+`EZP-24047 <https://jira.ez.no/browse/EZP-24047>`__
+
+`Allow skipping count db query when using SearchService against
+database <https://jira.ez.no/browse/EZP-24047>`__
+
+|Improvement|
+
+Feb 19, 2015
+
+Feb 27, 2015
+
+Unassigned
+
+André Rømcke
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-24048 <https://jira.ez.no/browse/EZP-24048>`__
+
+`Don't clear legacy content cache on symfony
+cache:clear <https://jira.ez.no/browse/EZP-24048>`__
+
+|Improvement|
+
+Feb 19, 2015
+
+Feb 26, 2015
+
+Unassigned
+
+André Rømcke
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-24092 <https://jira.ez.no/browse/EZP-24092>`__
+
+`Optimize queries to not perform count when not
+needed <https://jira.ez.no/browse/EZP-24092>`__
+
+|Improvement|
+
+Feb 27, 2015
+
+Mar 02, 2015
+
+Paulo Nunes
+
+André Rømcke
+
+|High|
+
+QA
+
+Unresolved
+
+`EZP-21586 <https://jira.ez.no/browse/EZP-21586>`__
+
+`ContentTypeService::createContentType() does not check for any
+permissions <https://jira.ez.no/browse/EZP-21586>`__
+
+|Bug|
+
+Sep 18, 2013
+
+Feb 05, 2015
+
+Unassigned
+
+Petar Spanja
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-21605 <https://jira.ez.no/browse/EZP-21605>`__
+
+`Version history Status column is missing
+data <https://jira.ez.no/browse/EZP-21605>`__
+
+|Bug|
+
+Sep 24, 2013
+
+Jan 07, 2015
+
+Unassigned
+
+Peter Keung
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-21686 <https://jira.ez.no/browse/EZP-21686>`__
+
+`ezinfo/copyright has extra "\\" that don't allow the links to
+work <https://jira.ez.no/browse/EZP-21686>`__
+
+|Bug|
+
+Oct 04, 2013
+
+Jan 20, 2015
+
+Unassigned
+
+Pedro Resende
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23129 <https://jira.ez.no/browse/EZP-23129>`__
+
+`Search API: sorting by field filters the
+results <https://jira.ez.no/browse/EZP-23129>`__
+
+|Bug|
+
+Jul 08, 2014
+
+Feb 17, 2015
+
+Unassigned
+
+Joao Inacio
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23278 <https://jira.ez.no/browse/EZP-23278>`__
+
+`[Content Staging] Sync fails if you try to use the copy of an
+object <https://jira.ez.no/browse/EZP-23278>`__
+
+|Bug|
+
+Aug 21, 2014
+
+Jan 06, 2015
+
+Unassigned
+
+Eduardo Fernandes
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23280 <https://jira.ez.no/browse/EZP-23280>`__
+
+`[PHP-FPM&Apache] Server fault when logging to administration
+interface <https://jira.ez.no/browse/EZP-23280>`__
+
+|Bug|
+
+Aug 22, 2014
+
+Jan 07, 2015
+
+Unassigned
+
+Cyrille Souchet
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23302 <https://jira.ez.no/browse/EZP-23302>`__
+
+`Update Location fails if no change is performed with the
+update <https://jira.ez.no/browse/EZP-23302>`__
+
+|Bug|
+
+Sep 01, 2014
+
+Jan 16, 2015
+
+Unassigned
+
+Carlos Revillo
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23403 <https://jira.ez.no/browse/EZP-23403>`__
+
+`Fix implementation of Persistence\\Solr\\Slot\\MoveUserGroup
+slot <https://jira.ez.no/browse/EZP-23403>`__
+
+|Bug|
+
+Sep 29, 2014
+
+Feb 17, 2015
+
+Unassigned
+
+Petar Spanja
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23465 <https://jira.ez.no/browse/EZP-23465>`__
+
+`Elasticsearch: refactor FieldMap implementation for caching and
+multiple fields support <https://jira.ez.no/browse/EZP-23465>`__
+
+|Bug|
+
+Oct 14, 2014
+
+Feb 17, 2015
+
+Unassigned
+
+Petar Spanja
+
+|High|
+
+Closed
+
+Done
+
+`EZP-23513 <https://jira.ez.no/browse/EZP-23513>`__
+
+`in eZXMLText, a <P> tag is being add to a link when it surrounds an
+image <https://jira.ez.no/browse/EZP-23513>`__
+
+|Bug|
+
+Oct 24, 2014
+
+Mar 02, 2015
+
+Unassigned
+
+Eduardo Fernandes
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23518 <https://jira.ez.no/browse/EZP-23518>`__
+
+`Clearing image aliases with Symfony console with --purge option results
+in PHP warnings <https://jira.ez.no/browse/EZP-23518>`__
+
+|Bug|
+
+Oct 25, 2014
+
+Feb 25, 2015
+
+Unassigned
+
+Edi Modrić
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23747 <https://jira.ez.no/browse/EZP-23747>`__
+
+`Staging: whitespace in a a required text block field causes sync
+failure <https://jira.ez.no/browse/EZP-23747>`__
+
+|Bug|
+
+Dec 03, 2014
+
+Jan 06, 2015
+
+Unassigned
+
+Nuno Oliveira
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23803 <https://jira.ez.no/browse/EZP-23803>`__
+
+`Fake draft users can be created to prevent someone to
+login <https://jira.ez.no/browse/EZP-23803>`__
+
+|Bug|
+
+Dec 15, 2014
+
+Jan 07, 2015
+
+Rui Silva
+
+Patrick Allaert
+
+|High|
+
+QA done
+
+Unresolved
+
+`EZP-23829 <https://jira.ez.no/browse/EZP-23829>`__
+
+`Paragraph alignment ignored in legacy rendered
+frontend <https://jira.ez.no/browse/EZP-23829>`__
+
+|Bug|
+
+Dec 22, 2014
+
+Feb 02, 2015
+
+Unassigned
+
+Eduardo Fernandes
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23834 <https://jira.ez.no/browse/EZP-23834>`__
+
+`Cached ESI can not be shared among pages because of inner
+request <https://jira.ez.no/browse/EZP-23834>`__
+
+|Bug|
+
+Dec 22, 2014
+
+Jan 21, 2015
+
+Unassigned
+
+Nuno Oliveira
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23835 <https://jira.ez.no/browse/EZP-23835>`__
+
+`indexcontent.php cronjob pgsql columns must appear in group
+by <https://jira.ez.no/browse/EZP-23835>`__
+
+|Bug|
+
+Dec 23, 2014
+
+Jan 09, 2015
+
+Unassigned
+
+Douglas Hammond
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23837 <https://jira.ez.no/browse/EZP-23837>`__
+
+`Impossible to set the value of a Media
+field <https://jira.ez.no/browse/EZP-23837>`__
+
+|Bug|
+
+Dec 26, 2014
+
+Feb 11, 2015
+
+Unassigned
+
+Damien Pobel
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23840 <https://jira.ez.no/browse/EZP-23840>`__
+
+`eZFind: incorrect error handling in elevate
+configuration <https://jira.ez.no/browse/EZP-23840>`__
+
+|Bug|
+
+Dec 29, 2014
+
+Jan 12, 2015
+
+Unassigned
+
+Joao Inacio
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23866 <https://jira.ez.no/browse/EZP-23866>`__
+
+`Move legacy\_mode setting to
+LegacyBundle <https://jira.ez.no/browse/EZP-23866>`__
+
+|Bug|
+
+Jan 08, 2015
+
+Jan 16, 2015
+
+Unassigned
+
+Jérôme Vieilledent
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23868 <https://jira.ez.no/browse/EZP-23868>`__
+
+`Move getLegacyKernel() helper from CoreBundle controller to
+LegacyBundle <https://jira.ez.no/browse/EZP-23868>`__
+
+|Bug|
+
+Jan 08, 2015
+
+Jan 14, 2015
+
+Unassigned
+
+Jérôme Vieilledent
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23870 <https://jira.ez.no/browse/EZP-23870>`__
+
+`Async publishing reverts
+expiry.php <https://jira.ez.no/browse/EZP-23870>`__
+
+|Bug|
+
+Jan 08, 2015
+
+Jan 16, 2015
+
+Unassigned
+
+Nuno Oliveira
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23872 <https://jira.ez.no/browse/EZP-23872>`__
+
+`Query exception thrown when no language configured in
+siteaccess <https://jira.ez.no/browse/EZP-23872>`__
+
+|Bug|
+
+Jan 11, 2015
+
+Jan 20, 2015
+
+Unassigned
+
+Owen Parry
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23879 <https://jira.ez.no/browse/EZP-23879>`__
+
+`ezinfo shows wrong copyright info after move to
+composer <https://jira.ez.no/browse/EZP-23879>`__
+
+|Bug|
+
+Jan 12, 2015
+
+Jan 15, 2015
+
+Unassigned
+
+André Rømcke
+
+|Critical|
+
+Closed
+
+Fixed
+
+`EZP-23884 <https://jira.ez.no/browse/EZP-23884>`__
+
+`Nginx template misses semicolon for most of the
+fastcgi\_params <https://jira.ez.no/browse/EZP-23884>`__
+
+|Bug|
+
+Jan 12, 2015
+
+Jan 14, 2015
+
+Unassigned
+
+Carlos Revillo
+
+|Low|
+
+Closed
+
+Fixed
+
+`EZP-23889 <https://jira.ez.no/browse/EZP-23889>`__
+
+`RestProvider must check that is\_rest\_request is
+true <https://jira.ez.no/browse/EZP-23889>`__
+
+|Bug|
+
+Jan 13, 2015
+
+Feb 26, 2015
+
+Yannick Roger
+
+Eduardo Fernandes
+
+|High|
+
+InputQ
+
+Unresolved
+
+`EZP-23902 <https://jira.ez.no/browse/EZP-23902>`__
+
+`Documentation: Multiple User Providers example config not
+working <https://jira.ez.no/browse/EZP-23902>`__
+
+|Bug|
+
+Jan 15, 2015
+
+Jan 28, 2015
+
+Unassigned
+
+Joao Inacio
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23904 <https://jira.ez.no/browse/EZP-23904>`__
+
+`ezpublish\_legacy\_sso causes infinite redirect loop on
+/login <https://jira.ez.no/browse/EZP-23904>`__
+
+|Bug|
+
+Jan 15, 2015
+
+Feb 10, 2015
+
+Unassigned
+
+Joao Inacio
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23906 <https://jira.ez.no/browse/EZP-23906>`__
+
+`The Public API allows to create content under a non container
+element <https://jira.ez.no/browse/EZP-23906>`__
+
+|Bug|
+
+Jan 16, 2015
+
+Feb 26, 2015
+
+Sarah Haïm-Lubczanski
+
+Damien Pobel
+
+|High|
+
+Documentation
+
+Unresolved
+
+`EZP-23908 <https://jira.ez.no/browse/EZP-23908>`__
+
+`expiry.php race condition <https://jira.ez.no/browse/EZP-23908>`__
+
+|Bug|
+
+Jan 16, 2015
+
+Feb 02, 2015
+
+Unassigned
+
+Georg Franz
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23923 <https://jira.ez.no/browse/EZP-23923>`__
+
+`ESI/Hinclude URI too long with Compound siteaccess
+matcher <https://jira.ez.no/browse/EZP-23923>`__
+
+|Bug|
+
+Jan 21, 2015
+
+Feb 04, 2015
+
+Unassigned
+
+Jérôme Vieilledent
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23928 <https://jira.ez.no/browse/EZP-23928>`__
+
+`Preview cache not being
+updated <https://jira.ez.no/browse/EZP-23928>`__
+
+|Bug|
+
+Jan 23, 2015
+
+Feb 26, 2015
+
+Unassigned
+
+Ricardo Correia
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-23930 <https://jira.ez.no/browse/EZP-23930>`__
+
+`Adapt HttpCache to comply FOSHttpCacheBundle
+1.2 <https://jira.ez.no/browse/EZP-23930>`__
+
+|Bug|
+
+Jan 23, 2015
+
+Jan 30, 2015
+
+Unassigned
+
+Jérôme Vieilledent
+
+|Blocker|
+
+Closed
+
+Fixed
+
+`EZP-23953 <https://jira.ez.no/browse/EZP-23953>`__
+
+`Legacy session events not triggered any
+more <https://jira.ez.no/browse/EZP-23953>`__
+
+|Bug|
+
+Jan 29, 2015
+
+Feb 17, 2015
+
+Unassigned
+
+Ricardo Correia
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23971 <https://jira.ez.no/browse/EZP-23971>`__
+
+`If a user is removed while logged in, session for that user will throw
+an exception <https://jira.ez.no/browse/EZP-23971>`__
+
+|Bug|
+
+Feb 02, 2015
+
+Feb 16, 2015
+
+Unassigned
+
+Paulo Bras
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23978 <https://jira.ez.no/browse/EZP-23978>`__
+
+`URLs in legacy\_mode lose siteaccess uri when index\_page is
+used <https://jira.ez.no/browse/EZP-23978>`__
+
+|Bug|
+
+Feb 03, 2015
+
+Feb 23, 2015
+
+Unassigned
+
+Joao Inacio
+
+|High|
+
+Closed
+
+Fixed
+
+`EZP-23981 <https://jira.ez.no/browse/EZP-23981>`__
+
+`Faulty embed-inline handling (arrow key
+navigation) <https://jira.ez.no/browse/EZP-23981>`__
+
+|Bug|
+
+Feb 04, 2015
+
+Feb 04, 2015
+
+Unassigned
+
+Gunnstein Lye
+
+|Medium|
+
+InputQ
+
+Unresolved
+
+`EZP-24010 <https://jira.ez.no/browse/EZP-24010>`__
+
+`Fix PHP version warning: 5.3.3, not just
+5.3 <https://jira.ez.no/browse/EZP-24010>`__
+
+|Bug|
+
+Feb 11, 2015
+
+Feb 11, 2015
+
+Unassigned
+
+Gunnstein Lye
+
+|Medium|
+
+Closed
+
+Fixed
+
+`EZP-24017 <https://jira.ez.no/browse/EZP-24017>`__
+
+`Security token issue using legacy
+bridge <https://jira.ez.no/browse/EZP-24017>`__
+
+|Bug|
+
+Feb 13, 2015
+
+Mar 03, 2015
+
+Unassigned
+
+Jérôme Vieilledent
+
+|Blocker|
+
+Closed
+
+Fixed
+
+`44
+issues <https://jira.ez.no/secure/IssueNavigator.jspa?reset=true&jqlQuery=project%3DEZP+AND+fixVersion+in+%28+%225.4.2%22+%29+AND+type+in+%28+Bug%2C+Story%2C+Improvement%29+ORDER+BY+issuetype+DESC%2C+key+ASC+++>`__
+
+Attachments:
+------------
+
+| |image49|
+`Getting-Started-with-eZ-Publish-Platform.jpg <attachments/26674882/26902759.jpg>`__
+(image/jpeg)
+
+Document generated by Confluence on Mar 03, 2015 15:13
+
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-23847
+.. |High| image:: https://jira.ez.no/images/icons/priorities/major.png
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-23940
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-23941
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-24047
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-24048
+.. |Improvement| image:: https://jira.ez.no/images/icons/issuetypes/improvement.png
+   :target: https://jira.ez.no/browse/EZP-24092
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-21586
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-21605
+.. |Medium| image:: https://jira.ez.no/images/icons/priorities/minor.png
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-21686
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23129
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23278
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23280
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23302
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23403
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23465
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23513
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23518
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23747
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23803
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23829
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23834
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23835
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23837
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23840
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23866
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23868
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23870
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23872
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23879
+.. |Critical| image:: https://jira.ez.no/images/icons/priorities/critical.png
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23884
+.. |Low| image:: https://jira.ez.no/images/icons/priorities/trivial.png
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23889
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23902
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23904
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23906
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23908
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23923
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23928
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23930
+.. |Blocker| image:: https://jira.ez.no/images/icons/priorities/blocker.png
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23953
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23971
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23978
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-23981
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-24010
+.. |Bug| image:: https://jira.ez.no/images/icons/issuetypes/bug.png
+   :target: https://jira.ez.no/browse/EZP-24017
+.. |image49| image:: images/icons/bullet_blue.gif
