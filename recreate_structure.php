@@ -11,9 +11,17 @@ if (!file_exists( $targetDirectory )) {
 foreach (glob( "RST/*.rst" ) as $rstFilePath) {
     $pageDirectoryPath = $targetDirectory . '/' . computeDirectory( $rstFilePath );
     @mkdir( $pageDirectoryPath, 0775, true );
+
     $filename = computeFilename( $rstFilePath );
-    copy( $rstFilePath, $targetPath = "$pageDirectoryPath/$filename" );
-    echo "$rstFilePath -> $targetPath\n";
+    if ( $filename === false ) {
+        echo "Unable to compute the filename for '$rstFilePath''\n";
+        continue;
+    }
+    $contents = file_get_contents( $rstFilePath );
+    fixupSplittedLines( $contents );
+    $targetPath = "$pageDirectoryPath/$filename";
+    file_put_contents( $targetPath, $contents );
+    echo "- $rstFilePath -> $targetPath\n";
 }
 
 function computeDirectory( $rstFilePath )
@@ -29,8 +37,10 @@ function computeDirectory( $rstFilePath )
     foreach ($lines as $line) {
         // we stop when done with this initial list
         if ( $line{0} != '#' ) break;
-        list( $title, $htmlFileName ) = sscanf( $line, '#. `%s <%s>`' );
-        $pathArray[] = $title;
+        if ( preg_match( '/#\. \`([^<]+) \<(.*)\>\`__$/', $line, $m ) ) {
+            $title = $m[1];
+            $pathArray[] = str_replace( ' ', '_', strtolower( $title ) );
+        }
     }
 
     return strtolower( implode( '/', $pathArray ) );
@@ -40,8 +50,28 @@ function computeFilename( $path )
 {
     $filename = strtolower( basename( $path, '.html.rst' ) );
     if ( preg_match( '/^(.*)_[0-9]+$/', $filename, $m ) ) {
-        $filename = $m[1];
+        $title = $m[1];
+    } else {
+        $title = figureOutTitle( $path );
+        if ($title === false) {
+            return false;
+        }
     }
 
-    return strtolower( str_replace( '-', '_', $filename ) ) . '.rst';
+    return strtolower( str_replace( '-', '_', $title ) ) . '.rst';
+}
+
+function fixupSplittedLines( &$text )
+{
+    $text = preg_replace( '/(\s+)-  \`(.+)$\s+(.+)\`__/m', '\1- `\2 \3`__', $text );
+}
+
+function figureOutTitle( $path )
+{
+    $contents = file_get_contents( $path );
+    if ( preg_match( '/([^\n]*)\n=={4,}/s', $contents, $m ) ) {
+        return $m[1];
+    } else {
+        return false;
+    }
 }
