@@ -4,6 +4,6 @@ eZ Publish Platform 5.x : Releases
 .. toctree::
    :maxdepth: 2
 
-   ez_platform_releases
-   ez_publish_5.x_releases
-   ez
+   releases/ez_platform_releases
+   releases/ez_publish_5.x_releases
+   releases/ez
