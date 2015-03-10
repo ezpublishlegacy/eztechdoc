@@ -7,6 +7,7 @@ If upgrading from a previous version of eZ Publish Platform please pay attention
 
 .. toctree::
    :maxdepth: 2
+   :glob:
 
    releases/ez_platform_releases
    releases/ez/*
